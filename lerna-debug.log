@@ -1,11 +1,16 @@
-0 silly argv {
-0 silly argv   _: [ 'add' ],
-0 silly argv   globs: [],
-0 silly argv   lernaVersion: '3.22.1',
-0 silly argv   '$0': '..\\..\\AppData\\Roaming\\npm\\node_modules\\lerna\\cli.js',
-0 silly argv   pkg: 'imooc-cli'
-0 silly argv }
-1 notice cli v3.22.1
-2 verbose rootPath C:\Users\WoodensRanger\Desktop\junc-cli
-3 error Error: 404 Not Found - GET https://registry.npm.taobao.org/imooc-cli
-3 error     at C:\Users\WoodensRanger\Desktop\junc-cli\node_modules\@evocateur\npm-registry-fetch\check-response.js:104:15
+15 error Error: Command failed: git remote update
+15 error Connection reset by 13.229.188.59 port 22
+15 error fatal: Could not read from remote repository.
+15 error
+15 error Please make sure you have the correct access rights
+15 error and the repository exists.
+15 error error: Could not fetch origin
+15 error
+15 error Fetching origin
+15 error
+15 error     at makeError (C:\Users\WoodensRanger\Desktop\junc-cli\node_modules\execa\index.js:174:9)
+15 error     at Function.module.exports.sync (C:\Users\WoodensRanger\Desktop\junc-cli\node_modules\execa\index.js:338:15)
+15 error     at Object.execSync (C:\Users\WoodensRanger\Desktop\junc-cli\node_modules\@lerna\child-process\index.js:26:16)
+15 error     at updateRemote (C:\Users\WoodensRanger\Desktop\junc-cli\node_modules\@lerna\version\lib\is-behind-upstream.js:26:16)
+15 error     at isBehindUpstream (C:\Users\WoodensRanger\Desktop\junc-cli\node_modules\@lerna\version\lib\is-behind-upstream.js:11:3)
+15 error     at VersionCommand.initialize (C:\Users\WoodensRanger\Desktop\junc-cli\node_modules\@lerna\version\index.js:154:9)
