@@ -1,6 +1,6 @@
 {
   "name": "@junc-cli/utils",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "junc-cli utils",
   "author": "WoodensRanger <q3565576>",
   "homepage": "",
@@ -18,7 +18,5 @@
   },
   "scripts": {
     "test": "echo \"Run testing from utils\""
-  },
-  "dependencies": {
   }
 }

@@ -1,6 +1,6 @@
 {
   "name": "@junc-cli/core",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "junc-cli core",
   "author": "WoodensRanger <q3565576>",
   "homepage": "",
@@ -20,6 +20,6 @@
     "test": "echo \"Run testing from core\""
   },
   "dependencies": {
-    "@junc-cli/utils": "^1.0.0"
+    "@junc-cli/utils": "^1.0.1"
   }
 }
