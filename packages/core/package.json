@@ -1,6 +1,6 @@
 {
   "name": "@junc-cli/core",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "junc-cli core",
   "author": "WoodensRanger <q3565576>",
   "homepage": "",
@@ -17,16 +17,13 @@
     "lib"
   ],
   "publishConfig": {
-    "registry": "https://registry.npm.taobao.org/"
+    "access": "public"
   },
   "scripts": {
     "test": "echo \"Run testing from core\""
   },
   "dependencies": {
-    "@junc-cli/utils": "^1.0.1"
+    "@junc-cli/utils": "^1.0.2"
   },
-  "gitHead": "809edc1fd03051a4908f069193074c6af396f345",
-  "publishConfig": {
-    "access": "public"
-  }
+  "gitHead": "809edc1fd03051a4908f069193074c6af396f345"
 }
