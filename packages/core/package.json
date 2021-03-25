@@ -4,7 +4,7 @@
   "description": "junc-cli core",
   "author": "WoodensRanger <q3565576>",
   "homepage": "",
-  "license": "ISC",
+  "license": "MIT",
   "main": "lib/core.js",
   "directories": {
     "lib": "lib",
