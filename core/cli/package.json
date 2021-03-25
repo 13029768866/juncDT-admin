@@ -5,7 +5,7 @@
   "author": "WoodensRanger <q3565576>",
   "homepage": "",
   "license": "ISC",
-  "main": "lib/core.js",
+  "main": "lib/index.js",
   "bin": {
     "junc-cli": "bin/index.js"
   },
@@ -23,7 +23,11 @@
     "test": "echo \"Run testing from core\""
   },
   "dependencies": {
-    "@junc-cli/utils": "^1.0.2"
+    "@junc-cli/log": "file:../../utils/log",
+    "colors": "^1.4.0",
+    "import-local": "^3.0.2",
+    "npmlog": "^4.1.2",
+    "semver": "^7.3.5"
   },
   "gitHead": "809edc1fd03051a4908f069193074c6af396f345"
 }
