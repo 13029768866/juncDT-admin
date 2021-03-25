@@ -25,5 +25,8 @@
   "dependencies": {
     "@junc-cli/utils": "^1.0.1"
   },
-  "gitHead": "809edc1fd03051a4908f069193074c6af396f345"
+  "gitHead": "809edc1fd03051a4908f069193074c6af396f345",
+  "publishConfig": {
+    "access": "public"
+  }
 }
