@@ -1,7 +1,5 @@
-.idea
-.vscode
 node_modules
-lerna-debug.index
-
-packages/**/node_modules
-
+.DS_Store
+dist
+dist-ssr
+*.local
