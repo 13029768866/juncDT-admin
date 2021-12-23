@@ -33,6 +33,8 @@
 
 <style scoped>
   a {
+    height: 10px;
+    width: 20px;
     color: #42b983;
   }
 </style>
