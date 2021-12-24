@@ -9,7 +9,9 @@
     "lint:lint-staged": "lint-staged"
   },
   "dependencies": {
-    "vue": "^3.2.25"
+    "ant-design-vue": "2.2.8",
+    "vue": "^3.2.25",
+    "vue-router": "^4.0.12"
   },
   "devDependencies": {
     "@commitlint/cli": "^15.0.0",
@@ -31,7 +33,9 @@
     "stylelint-config-recommended": "^6.0.0",
     "stylelint-config-standard": "^24.0.0",
     "stylelint-order": "^5.0.0",
+    "unplugin-vue-components": "^0.17.9",
     "vite": "^2.7.2",
+    "vite-plugin-svg-icons": "^1.0.5",
     "vue-eslint-parser": "^8.0.1"
   },
   "config": {
