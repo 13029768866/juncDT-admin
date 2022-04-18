@@ -1,6 +1,4 @@
-import { createApp } from 'vue';
-import App from './App.vue';
-// svg注册脚本
-import 'virtual:svg-icons-register';
+import { createApp } from 'vue'
+import App from './App.vue'
 
-createApp(App).mount('#app');
+createApp(App).mount('#app')
