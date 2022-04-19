@@ -1,7 +1,10 @@
 import { resolve } from 'path'
 import { defineConfig, loadEnv } from 'vite'
-import vue from '@vitejs/plugin-vue'
+// 处理环境变量
 import { wrapperEnv } from './build'
+// 插件列表
+import { getPluginsList } from "./build/plugins";
+
 
 
 // 进程的当前目录
@@ -53,8 +56,8 @@ export default defineConfig(({command, mode}) => {
       // 消除打包大小500kb警告
       chunkSizeWarningLimit: 2000
     },
-    // 插件配置（todo 单独维护）
-    plugins: [vue()],
+    // 插件配置
+    plugins: getPluginsList(command, VITE_LEGACY),
     // 依赖优化选项
     optimizeDeps: {
       // 默认情况下,不在node_modules中的链接包不会被预构建,可强制预构建想要的链接包
