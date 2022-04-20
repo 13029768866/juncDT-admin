@@ -15,12 +15,11 @@ module.exports = {
   // 解析器选项
   parserOptions: {
     ecmaVersion: 12, // es12版本  https://blog.csdn.net/TIAN20121221/article/details/114648905
-    parser: '@typescript-eslint/parser', // 解析器 将 TypeScript 转换成与 estree 兼容的形式，以便在ESLint中使用
     sourceType: 'module', // ECMAScript 模块
     extraFileExtensions: ['.vue'],
   },
   // eslint plugins 存放你要使用的插件列表
-  plugins: ['vue', '@typescript-eslint'],
+  plugins: ['vue'],
   rules: {
     /* 此处针对console以及debugger 最好采用babel-plugin-transform-remove-console
  以及 vite 采用的 minify 选项 在打包的时候关闭debugger及console */
@@ -37,19 +36,19 @@ module.exports = {
     // eslint-plugin-import
     'import/no-extraneous-dependencies': 'off', // 检查package.json判断哪些需要采用dependencies注入 关闭 原因一些依赖组件依赖项 会出现一些检测错误
     // typescript-eslint
-    '@typescript-eslint/no-unused-vars': [
-      // 未使用过的变量处理
-      'error',
-      {
-        argsIgnorePattern: '^_',
-        varsIgnorePattern: '^_',
-      },
-    ],
-    '@typescript-eslint/ban-ts-comment': 'off', // 允许使用ts-ignore
-    '@typescript-eslint/no-explicit-any': 'off', // 禁止使用any类型
-    '@typescript-eslint/no-non-null-assertion': 'off', // 禁止使用非空断言
-    '@typescript-eslint/explicit-function-return-type': 'off', // 需要函数的返回类型
-    '@typescript-eslint/explicit-module-boundary-types': 'off', // 指定导出数据类型
+    // '@typescript-eslint/no-unused-vars': [
+    //   // 未使用过的变量处理
+    //   'error',
+    //   {
+    //     argsIgnorePattern: '^_',
+    //     varsIgnorePattern: '^_',
+    //   },
+    // ],
+    // '@typescript-eslint/ban-ts-comment': 'off', // 允许使用ts-ignore
+    // '@typescript-eslint/no-explicit-any': 'off', // 禁止使用any类型
+    // '@typescript-eslint/no-non-null-assertion': 'off', // 禁止使用非空断言
+    // '@typescript-eslint/explicit-function-return-type': 'off', // 需要函数的返回类型
+    // '@typescript-eslint/explicit-module-boundary-types': 'off', // 指定导出数据类型
   },
   overrides: [
     {
