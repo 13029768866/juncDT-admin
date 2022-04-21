@@ -32,7 +32,23 @@ export default defineConfig(({ command, mode }) => {
         '/@': pathResolve('src'),
       },
     },
-    /* css todo list */
+    css: {
+      // https://github.com/vitejs/vite/issues/5833
+      postcss: {
+        plugins: [
+          {
+            postcssPlugin: 'internal:charset-removal',
+            AtRule: {
+              charset: (atRule) => {
+                if (atRule.name === 'charset') {
+                  atRule.remove();
+                }
+              },
+            },
+          },
+        ],
+      },
+    },
     // 服务器选项
     server: {
       host: '0.0.0.0',

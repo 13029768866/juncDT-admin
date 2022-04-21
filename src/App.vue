@@ -2,6 +2,7 @@
 
 <template>
   <img alt="Vue logo" src="./assets/logo.png" />
+  CSS添加
 </template>
 
 <style>
