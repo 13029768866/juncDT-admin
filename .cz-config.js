@@ -4,6 +4,7 @@ module.exports = {
     { value: 'feat', name: 'feat:     新增功能' },
     { value: 'fix', name: 'fix:      修复 bug' },
     { value: 'docs', name: 'docs:     文档变更' },
+    { value: 'dep', name: 'dep:     添加依赖' },
     { value: 'style', name: 'style:    代码格式（不影响功能，例如空格、分号等格式修正）' },
     { value: 'refactor', name: 'refactor: 代码重构（不包括 bug 修复、功能新增）' },
     { value: 'perf', name: 'perf:     性能优化' },
@@ -27,6 +28,7 @@ module.exports = {
     ['deps', '项目依赖'],
     ['auth', '对 auth 修改'],
     ['other', '其他修改'],
+    ['pkg', '依赖更新'],
     // 如果选择 custom，后面会让你再输入一个自定义的 scope。也可以不设置此项，把后面的 allowCustomScopes 设置为 true
     ['custom', '以上都不是？我要自定义'],
   ].map(([value, description]) => {
