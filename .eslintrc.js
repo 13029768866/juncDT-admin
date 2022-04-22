@@ -27,6 +27,7 @@ module.exports = {
     'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
     'no-shadow': 'off', // 局部变量与其包含范围内的变量共享相同名称
     'no-bitwise': 'off', // 禁止使用按位操作符
+    'no-undef': 'off', // 禁止使用为什么变量
     'default-case': 'off', // 要求switch语句必须要有default
     'no-plusplus': 'off', // 禁止使用一元操作符
     'no-param-reassign': 'off', // 禁止分配函数参数

@@ -1,10 +1,15 @@
-<script setup></script>
-
 <template>
   <img alt="Vue logo" src="./assets/logo.png" />
-  CSS添加
+  {{ count }}
+  <el-button @click="add">css添加</el-button>
 </template>
 
+<script setup>
+  const count = ref(1);
+  const add = () => {
+    count.value++;
+  };
+</script>
 <style>
   #app {
     font-family: Avenir, Helvetica, Arial, sans-serif;

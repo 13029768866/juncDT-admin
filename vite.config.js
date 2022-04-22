@@ -30,6 +30,7 @@ export default defineConfig(({ command, mode }) => {
       // 别名配置
       alias: {
         '/@': pathResolve('src'),
+        '@build': pathResolve('build'),
       },
     },
     css: {
