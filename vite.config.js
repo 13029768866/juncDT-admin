@@ -5,9 +5,6 @@ import { wrapperEnv } from './build';
 // 插件列表
 import { getPluginsList } from './build/plugins';
 
-// 进程的当前目录
-const root = process.cwd();
-
 // 路径查找
 const pathResolve = (dir) => {
   return resolve(__dirname, '.', dir);
@@ -18,13 +15,17 @@ export default defineConfig(({ command, mode }) => {
   /* 情景模式配置: command代表指令(dev/serve/build) */
   /* loadEnv根据root(当前目录)加载环境变量文件(.env) */
 
-  const { VITE_PORT, VITE_LEGACY, VITE_PUBLIC_PATH } = wrapperEnv(loadEnv(mode, root));
+  // 进程的当前目录
+  const root = process.cwd();
+  const env = loadEnv(mode, root);
+  const viteEnv = wrapperEnv(env);
+  const { VITE_PORT, VITE_LEGACY, VITE_PUBLIC_PATH } = viteEnv;
 
   return {
-    // 项目根目录（index.html 文件所在的位置）,默认process.cwd()
-    root,
     // 公共基础路径
     base: VITE_PUBLIC_PATH,
+    // 项目根目录（index.html 文件所在的位置）,默认process.cwd()
+    root,
     // 文件导入配置
     resolve: {
       // 别名配置

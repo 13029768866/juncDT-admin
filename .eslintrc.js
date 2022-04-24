@@ -36,6 +36,7 @@ module.exports = {
     'prefer-destructuring': ['error', { object: true, array: false }], // 强制object使用解构
     // eslint-plugin-import
     'import/no-extraneous-dependencies': 'off', // 检查package.json判断哪些需要采用dependencies注入 关闭 原因一些依赖组件依赖项 会出现一些检测错误
+    'vue/multi-word-component-names': 'off', // 解决组件mul-compoent报错
     // typescript-eslint
     // '@typescript-eslint/no-unused-vars': [
     //   // 未使用过的变量处理

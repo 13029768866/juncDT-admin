@@ -2,32 +2,29 @@
 const wrapperEnv = (envConf) => {
   // 此处为默认值，无需修改
   const ret = {
-    VITE_PORT: 5188,
-    VITE_PUBLIC_PATH: "",
-    VITE_PROXY_DOMAIN: "",
-    VITE_PROXY_DOMAIN_REAL: "",
-    VITE_ROUTER_HISTORY: "",
-    VITE_LEGACY: false
+    VITE_PORT: '',
+    VITE_PUBLIC_PATH: '',
+    VITE_PROXY_DOMAIN: '',
+    VITE_PROXY_DOMAIN_REAL: '',
+    VITE_ROUTER_HISTORY: '',
+    VITE_LEGACY: false,
   };
 
   for (const envName of Object.keys(envConf)) {
-    let realName = envConf[envName].replace(/\\n/g, "\n");
-    realName =
-      realName === "true" ? true : realName === "false" ? false : realName;
+    let realName = envConf[envName].replace(/\\n/g, '\n');
+    realName = realName === 'true' ? true : realName === 'false' ? false : realName;
 
-    if (envName === "VITE_PORT") {
+    if (envName === 'VITE_PORT') {
       realName = Number(realName);
     }
     ret[envName] = realName;
-    if (typeof realName === "string") {
+    if (typeof realName === 'string') {
       process.env[envName] = realName;
-    } else if (typeof realName === "object") {
+    } else if (typeof realName === 'object') {
       process.env[envName] = JSON.stringify(realName);
     }
   }
   return ret;
 };
 
-export {
-  wrapperEnv
-};
+export { wrapperEnv };
