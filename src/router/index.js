@@ -1,4 +1,5 @@
 import { createRouter, createWebHashHistory } from 'vue-router';
+import NProgress from '/@/utils/progress';
 
 /* 路由模块 */
 import dashboardRouter from './modules/dashboard';
@@ -15,5 +16,12 @@ const router = createRouter({
 });
 
 /* 路由守卫 */
+router.beforeEach(() => {
+  NProgress.start();
+});
+
+router.afterEach(() => {
+  NProgress.done();
+});
 
 export default router;
