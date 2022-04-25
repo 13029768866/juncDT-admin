@@ -1,0 +1,39 @@
+@mixin merge-style($sideBarWidth) {
+  $menuActiveText: #7a80b4;
+  @media screen and (min-width: 150px) and (max-width: 420px) {
+    .app-main-nofixed-header {
+      overflow-y: hidden;
+    }
+  }
+  @media screen and (min-width: 420px) {
+    .app-main-nofixed-header {
+      overflow: hidden;
+    }
+  }
+
+  .sidebar-container {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: $sideBarWidth !important;
+    height: 100%;
+    font-size: 0;
+    //background: $menuBg;
+    border: 1px solid #000;
+    z-index: 1001;
+    overflow: hidden;
+    box-shadow: 0 0 1px #888;
+    transition: width 0.28s;
+  }
+
+  .scrollbar-wrapper {
+    overflow-x: hidden !important;
+  }
+}
+
+/* 左侧菜单 */
+body[layout='vertical'] {
+  $sideBarWidth: 210px;
+  @include merge-style($sideBarWidth);
+}

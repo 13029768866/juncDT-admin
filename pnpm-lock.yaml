@@ -25,6 +25,7 @@ specifiers:
   postcss-import: ^14.1.0
   postcss-scss: ^4.0.3
   prettier: ^2.6.2
+  responsive-storage: ^1.0.11
   sass: ^1.50.1
   stylelint: ^14.7.1
   stylelint-config-prettier: ^9.0.3
@@ -46,6 +47,7 @@ dependencies:
   element-plus: 2.1.10_vue@3.2.33
   nprogress: 0.2.0
   pinia: 2.0.13_vue@3.2.33
+  responsive-storage: 1.0.11_vue@3.2.33
   vue: 3.2.33
   vue-router: 4.0.14_vue@3.2.33
 
@@ -3408,6 +3410,14 @@ packages:
       path-parse: 1.0.7
       supports-preserve-symlinks-flag: 1.0.0
     dev: true
+
+  /responsive-storage/1.0.11_vue@3.2.33:
+    resolution: {integrity: sha512-XY/21b7FKCXwBWGLuxp5KUQOAh8jOTsdfRMz0RVE9P+HhK4oYXKcNESDLxE1mD5MWPg/i+k4SGogro5daMrE9A==}
+    peerDependencies:
+      vue: ^3.2.0
+    dependencies:
+      vue: 3.2.33
+    dev: false
 
   /restore-cursor/2.0.0:
     resolution: {integrity: sha1-n37ih/gv0ybU/RYpI9YhKe7g368=}

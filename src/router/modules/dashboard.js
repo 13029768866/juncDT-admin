@@ -1,8 +1,9 @@
+const Layout = () => import('/@/layout/index.vue');
 const dashboardRouter = {
   path: '/',
   name: 'home',
   redirect: '/dashboard',
-  component: () => import('/@/views/dashboard/workbench/index.vue'),
+  component: Layout,
   meta: {
     title: '首页',
   },
