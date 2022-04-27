@@ -10,8 +10,8 @@ import './style/index.scss';
 const app = createApp(App);
 
 // 注册自定义指令 todo
-getServerConfig(app).then(async (config) => {
-  console.log(config);
+getServerConfig(app).then(async () => {
+  // console.log(config);
   app.use(router);
   await router.isReady();
   setupStore(app);
