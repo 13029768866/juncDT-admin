@@ -62,7 +62,6 @@
     locale.value = locales[(locales.indexOf(locale.value) + 1) % locales.length];
     instance.locale = { locale: locale.value };
   };
-
   /* 国际化end */
 </script>
 
