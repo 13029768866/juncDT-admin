@@ -14,7 +14,7 @@ export function getPluginsList(command, VITE_LEGACY) {
     vue(),
     vueJsx(),
     // 国际化
-    //
+    // https://github.com/intlify/bundle-tools/tree/main/packages/vite-plugin-vue-i18n
     VueI18n({
       include: [resolve('locales/**')],
     }),
