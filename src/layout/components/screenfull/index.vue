@@ -1,7 +1,7 @@
 <template>
   <div class="screen-full" @click="toggle">
     <FontIcon
-      :title="isFullscreen ? '退出全屏' : '全屏'"
+      :title="isFullscreen ? t('buttons.hsexitfullscreen') : t('buttons.hsfullscreen')"
       :icon="isFullscreen ? 'team-iconexit-fullscreen' : 'team-iconfullscreen'"
     ></FontIcon>
   </div>
@@ -9,7 +9,10 @@
 
 <script setup>
   import { useFullscreen } from '@vueuse/core';
+  import { useI18n } from 'vue-i18n';
+
   const { isFullscreen, toggle } = useFullscreen();
+  const { t } = useI18n();
 </script>
 
 <style lang="scss" scoped>

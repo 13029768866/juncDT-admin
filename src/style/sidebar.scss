@@ -21,7 +21,6 @@
     height: 100%;
     font-size: 0;
     //background: $menuBg;
-    border: 1px solid #000;
     z-index: 1001;
     overflow: hidden;
     box-shadow: 0 0 1px #888;
@@ -39,7 +38,6 @@
     margin-left: $sideBarWidth;
     background: #f0f2f5;
     transition: margin-left 0.28s;
-    border: 1px solid red;
   }
 }
 

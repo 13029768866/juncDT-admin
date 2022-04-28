@@ -3,12 +3,52 @@
     <div class="vertical-header-right">
       <!--  全屏  -->
       <screenfull />
+      <!--  国际化  -->
+      <el-dropdown trigger="click">
+        <globalization />
+        <template #dropdown>
+          <el-dropdown-menu class="translation">
+            <el-dropdown-item @click="translationCh">
+              <span v-show="locale === 'zh'" class="check-zh">
+                <IconifyIconOffline icon="check" />
+              </span>
+              简体中文
+            </el-dropdown-item>
+            <el-dropdown-item @click="translationEn">
+              <span v-show="locale === 'en'" class="check-en">
+                <IconifyIconOffline icon="check" />
+              </span>
+              English
+            </el-dropdown-item>
+          </el-dropdown-menu>
+        </template>
+      </el-dropdown>
+      <span class="el-icon-setting">
+        <IconifyIconOffline icon="setting" />
+      </span>
     </div>
   </div>
 </template>
 
 <script setup>
+  import { useI18n } from 'vue-i18n';
   import screenfull from '../components/screenfull/index.vue';
+  import globalization from '/@/assets/svg/globalization.svg?component';
+
+  const instance = getCurrentInstance().appContext.config.globalProperties.$storage;
+  console.log('navbar----', instance);
+  /* 国际化start */
+  const { locale } = useI18n();
+
+  const translationCh = () => {
+    instance.locale = { locale: 'zh' };
+    locale.value = 'zh';
+  };
+  const translationEn = () => {
+    instance.locale = { locale: 'en' };
+    locale.value = 'en';
+  };
+  /* 国际化end */
 </script>
 
 <style lang="scss" scoped>
@@ -33,6 +73,7 @@
         }
       }
 
+      // 全屏
       .screen-full {
         cursor: pointer;
 
@@ -40,7 +81,7 @@
           background: #f6f6f6;
         }
       }
-
+      // 国际化
       .globalization {
         height: 48px;
         width: 40px;
@@ -89,6 +130,23 @@
           background: #f6f6f6;
         }
       }
+    }
+  }
+
+  // 国际化
+  .translation {
+    ::v-deep(.el-dropdown-menu__item) {
+      padding: 5px 40px;
+    }
+
+    .check-zh {
+      position: absolute;
+      left: 20px;
+    }
+
+    .check-en {
+      position: absolute;
+      left: 20px;
     }
   }
 </style>
