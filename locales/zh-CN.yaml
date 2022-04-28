@@ -1,3 +1,4 @@
 buttons:
-  hsfullscreen: 全屏
-  hsexitfullscreen: 退出全屏
+  fullscreen: 全屏
+  exitfullscreen: 退出全屏
+  systemSettings: 打开项目配置

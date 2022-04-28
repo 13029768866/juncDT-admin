@@ -1,3 +1,4 @@
 buttons:
-  hsfullscreen: FullScreen
-  hsexitfullscreen: ExitFullscreen
+  fullscreen: FullScreen
+  exitfullscreen: ExitFullscreen
+  systemSettings: Open ProjectConfig

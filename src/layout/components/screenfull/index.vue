@@ -1,7 +1,7 @@
 <template>
   <div class="screen-full" @click="toggle">
     <FontIcon
-      :title="isFullscreen ? t('buttons.hsexitfullscreen') : t('buttons.hsfullscreen')"
+      :title="isFullscreen ? t('buttons.exitfullscreen') : t('buttons.fullscreen')"
       :icon="isFullscreen ? 'team-iconexit-fullscreen' : 'team-iconfullscreen'"
     ></FontIcon>
   </div>

@@ -8,13 +8,13 @@
         <globalization />
         <template #dropdown>
           <el-dropdown-menu class="translation">
-            <el-dropdown-item @click="translationCh">
+            <el-dropdown-item @click="toggleLocales">
               <span v-show="locale === 'zh'" class="check-zh">
                 <IconifyIconOffline icon="check" />
               </span>
               简体中文
             </el-dropdown-item>
-            <el-dropdown-item @click="translationEn">
+            <el-dropdown-item @click="toggleLocales">
               <span v-show="locale === 'en'" class="check-en">
                 <IconifyIconOffline icon="check" />
               </span>
@@ -23,7 +23,25 @@
           </el-dropdown-menu>
         </template>
       </el-dropdown>
-      <span class="el-icon-setting">
+      <!--  设置  -->
+      <el-dropdown trigger="click">
+        <span class="el-dropdown-link">
+          <img :src="avatars" />
+          <p>我二弟天下无敌</p>
+        </span>
+        <!--        <template #dropdown>-->
+        <!--          <el-dropdown-menu class="logout">-->
+        <!--            <el-dropdown-item @click="logout">-->
+        <!--              <IconifyIconOffline-->
+        <!--                icon="logout-circle-r-line"-->
+        <!--                style="margin: 5px"-->
+        <!--              />{{ t("buttons.hsLoginOut") }}</el-dropdown-item-->
+        <!--            >-->
+        <!--          </el-dropdown-menu>-->
+        <!--        </template>-->
+      </el-dropdown>
+      <!--  设置  -->
+      <span class="el-icon-setting" :title="t('buttons.systemSettings')">
         <IconifyIconOffline icon="setting" />
       </span>
     </div>
@@ -34,20 +52,17 @@
   import { useI18n } from 'vue-i18n';
   import screenfull from '../components/screenfull/index.vue';
   import globalization from '/@/assets/svg/globalization.svg?component';
+  import avatars from '/@/assets/avatars.webp';
 
   const instance = getCurrentInstance().appContext.config.globalProperties.$storage;
-  console.log('navbar----', instance);
   /* 国际化start */
-  const { locale } = useI18n();
+  const { t, availableLocales, locale } = useI18n();
+  const toggleLocales = () => {
+    const locales = availableLocales;
+    locale.value = locales[(locales.indexOf(locale.value) + 1) % locales.length];
+    instance.locale = { locale: locale.value };
+  };
 
-  const translationCh = () => {
-    instance.locale = { locale: 'zh' };
-    locale.value = 'zh';
-  };
-  const translationEn = () => {
-    instance.locale = { locale: 'en' };
-    locale.value = 'en';
-  };
   /* 国际化end */
 </script>
 
@@ -94,7 +109,7 @@
       }
 
       .el-dropdown-link {
-        width: 100px;
+        min-width: 100px;
         height: 48px;
         padding: 10px;
         display: flex;
@@ -109,6 +124,7 @@
 
         p {
           font-size: 14px;
+          margin-left: 5px;
         }
 
         img {
@@ -139,11 +155,7 @@
       padding: 5px 40px;
     }
 
-    .check-zh {
-      position: absolute;
-      left: 20px;
-    }
-
+    .check-zh,
     .check-en {
       position: absolute;
       left: 20px;
