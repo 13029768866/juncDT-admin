@@ -1,6 +1,9 @@
 <template>
   <div class="screen-full" @click="toggle">
-    {{ isFullscreen ? '全屏' : '非全屏' }}
+    <FontIcon
+      :title="isFullscreen ? '退出全屏' : '全屏'"
+      :icon="isFullscreen ? 'team-iconexit-fullscreen' : 'team-iconfullscreen'"
+    ></FontIcon>
   </div>
 </template>
 
