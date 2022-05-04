@@ -2,3 +2,5 @@ buttons:
   fullscreen: FullScreen
   exitfullscreen: ExitFullscreen
   systemSettings: Open ProjectConfig
+menus:
+  workbench: Workbench

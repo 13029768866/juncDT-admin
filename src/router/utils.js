@@ -1,19 +1,14 @@
 import { buildHierarchyTree } from '/@/utils/tree';
+import { usePermissionStoreHook } from '/@/store/modules/permission';
 
-// 按照路由中meta的rank等级升序排列
-export function ascending(arr) {
-  arr.forEach((v) => {
-    if (v?.meta?.rank === null) v.meta.rank = undefined;
-    if (v?.meta?.rank === 0) {
-      if (v.name !== 'home' && v.path !== '/') {
-        console.log('rank在home页需要设置为0');
-      }
-    }
-  });
-  return arr.sort((a, b) => {
-    return a?.meta?.rank - b?.meta?.rank;
+/* 初始化路由 */
+export function initRouter() {
+  return new Promise(() => {
+    // 动态路由处理 todo
+    usePermissionStoreHook().changeSetting([]);
   });
 }
+
 /*
     嵌套路由处理成一维路由
 *   parma routesList 传入路由表
@@ -55,4 +50,26 @@ export function formatTwoStageRoutes(routesList) {
     }
   });
   return newRoutesList;
+}
+
+/* 按照路由中meta的rank等级升序排列 */
+export function ascending(arr) {
+  arr.forEach((v) => {
+    if (v?.meta?.rank === null) v.meta.rank = undefined;
+    if (v?.meta?.rank === 0) {
+      if (v.name !== 'home' && v.path !== '/') {
+        console.log('rank在home页需要设置为0');
+      }
+    }
+  });
+  return arr.sort((a, b) => {
+    return a?.meta?.rank - b?.meta?.rank;
+  });
+}
+
+/* 根据meta中showLink筛选 */
+export function filterTree(data) {
+  const newTree = data.filter((v) => v.meta?.showLink !== false);
+  newTree.forEach((v) => v.children && (v.children = filterTree(v.children)));
+  return newTree;
 }

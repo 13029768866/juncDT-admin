@@ -1,3 +1,5 @@
+import { $t } from '/@/plugins/i18n';
+
 const Layout = () => import('/@/layout/index.vue');
 const dashboardRouter = {
   path: '/',
@@ -5,7 +7,9 @@ const dashboardRouter = {
   redirect: '/dashboard',
   component: Layout,
   meta: {
-    title: '首页',
+    title: $t('menus.workbench'),
+    i18n: true,
+    rank: 0,
   },
   children: [
     {
@@ -13,7 +17,8 @@ const dashboardRouter = {
       name: 'dashboard',
       component: () => import('/@/views/dashboard/workbench/index.vue'),
       meta: {
-        title: '工作台',
+        title: $t('menus.workbench'),
+        i18n: true,
       },
     },
   ],

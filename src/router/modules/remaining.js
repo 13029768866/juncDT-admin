@@ -5,6 +5,7 @@ const remainingRouter = [
     component: () => import('/@/views/sys/login/login.vue'),
     meta: {
       title: '登录',
+      showLink: false,
     },
   },
 ];

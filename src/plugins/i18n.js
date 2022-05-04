@@ -16,6 +16,34 @@ function siphonI18n(prefix = 'zh-CN') {
   )[prefix];
 }
 
+/* 国际化转换工具start */
+export const $t = (key) => key;
+
+/**
+ * 国际化转换工具函数
+ * @param message message
+ * @param isI18n  如果true,获取对应的消息,否则返回本身
+ * @returns message
+ */
+export function transformI18n(message, isI18n) {
+  if (!message) {
+    return '';
+  }
+
+  // 处理存储动态路由的title,格式 {zh:"",en:""}
+  if (typeof message === 'object') {
+    const { locale } = i18n.global;
+    return message[locale?.value];
+  }
+
+  if (isI18n) {
+    return i18n.global.t.call(i18n.global.locale, message);
+  } else {
+    return message;
+  }
+}
+/* 国际化转换工具end */
+
 export const localesConfigs = {
   zh: {
     ...siphonI18n('zh-CN'),
@@ -26,14 +54,12 @@ export const localesConfigs = {
     ...enLocale,
   },
 };
-console.log('i18n', storageLocal);
 export const i18n = createI18n({
   legacy: false,
   fallbackLocale: 'en',
   locale: storageLocal.getItem('responsive-locale')?.locale ?? 'zh',
   messages: localesConfigs,
 });
-
 export function useI18n(app) {
   app.use(i18n);
 }
