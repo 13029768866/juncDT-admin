@@ -2,6 +2,8 @@ buttons:
   fullscreen: FullScreen
   exitfullscreen: ExitFullscreen
   systemSettings: Open ProjectConfig
+  expand: Expand
+  collapse: Collapse
 menus:
   workbench: Workbench
   error: Error Page

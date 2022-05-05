@@ -1,6 +1,8 @@
 import { remainingPaths } from '/@/router';
+import { useAppStoreHook } from '/@/store/modules/app';
 
 export function useNav() {
+  const wrApp = useAppStoreHook();
   /* 菜单选择 */
   const menuSelect = (indexPath, routers) => {
     if (remainingPaths.includes(indexPath)) return;
@@ -8,8 +10,8 @@ export function useNav() {
     const parentPathIndex = indexPath.lastIndexOf('/');
     if (parentPathIndex > 0) {
       parentPath = indexPath.slice(0, parentPathIndex);
+      console.log(parentPath);
     }
-    /* */
     const findCurrentRoute = (indexPath, routes) => {
       return routes.map((item) => {
         if (item.path === indexPath) {
@@ -17,7 +19,6 @@ export function useNav() {
             findCurrentRoute(item.redirect, item.children);
           } else {
             /* 切换左侧菜单 通知标签页 */
-            console.log('eslint-ignore', parentPath);
             // emitter.emit('changLayoutRoute', {
             //   indexPath,
             //   parentPath,
@@ -31,7 +32,14 @@ export function useNav() {
     findCurrentRoute(indexPath, routers);
   };
 
+  /* 侧边栏切换 */
+  const toggleSideBar = () => {
+    wrApp.toggleSideBar();
+  };
+
   return {
+    wrApp,
     menuSelect,
+    toggleSideBar,
   };
 }

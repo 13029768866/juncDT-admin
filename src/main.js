@@ -8,6 +8,7 @@ import { injectResponsiveStorage } from '/@/utils/storage/responsive';
 
 // 样式导入
 import './style/index.scss';
+import 'virtual:windi.css';
 
 // 字体图标导入
 import './assets/iconfont/iconfont.js';

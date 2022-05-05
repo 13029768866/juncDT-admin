@@ -1,5 +1,10 @@
 <template>
   <div class="navbar">
+    <Hamburger
+      class="hamburger-container"
+      :is-active="wrApp.sidebar.opened"
+      @toggleClick="toggleSideBar"
+    />
     <div class="vertical-header-right">
       <!--  全屏  -->
       <screenfull />
@@ -50,7 +55,10 @@
 
 <script setup>
   import { useI18n } from 'vue-i18n';
-  import screenfull from '../components/screenfull/index.vue';
+  import { useNav } from '../hooks/useNav';
+
+  import Screenfull from '../components/screenfull/index.vue';
+  import Hamburger from './sidebar/hamburger.vue';
   import globalization from '/@/assets/svg/globalization.svg?component';
   import avatars from '/@/assets/avatars.webp';
 
@@ -63,6 +71,8 @@
     instance.locale = { locale: locale.value };
   };
   /* 国际化end */
+
+  const { wrApp, toggleSideBar } = useNav();
 </script>
 
 <style lang="scss" scoped>
@@ -72,6 +82,15 @@
     overflow: hidden;
     background: #fff;
     box-shadow: 0 1px 4px rgba(0, 21, 41, 0.08);
+
+    .hamburger-container {
+      line-height: 48px;
+      height: 100%;
+      float: left;
+      cursor: pointer;
+      transition: background 0.3s;
+      -webkit-tap-highlight-color: transparent;
+    }
 
     .vertical-header-right {
       display: flex;
