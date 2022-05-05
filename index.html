@@ -5,7 +5,11 @@
     <link rel="icon" href="/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Vite App</title>
-    <script type="module" crossorigin src="/assets/index.a6578fca.js"></script>
+    <script>
+      /* 解决浏览器path模块process的bug */
+      window.process = {};
+    </script>
+    <script type="module" crossorigin src="/assets/index.c9601f2e.js"></script>
     <link rel="stylesheet" href="/assets/index.f72bc2f6.css">
   </head>
   <body>
