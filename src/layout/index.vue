@@ -19,7 +19,7 @@
   import LayoutHeader from './components/layoutHeader.vue';
   import AppMain from './components/appMain.vue';
 
-  /* 配置 */
+  /* 配置选项 */
   const set = reactive({
     sidebar: computed(() => {
       return useAppStoreHook().sidebar;

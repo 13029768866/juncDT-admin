@@ -46,6 +46,14 @@
     background: #f0f2f5;
     transition: margin-left 0.28s;
   }
+
+  // vertical菜单下hideSidebar去除动画
+  .withoutAnimation {
+    .main-container,
+    .sidebar-container {
+      transition: none;
+    }
+  }
 }
 
 /* 左侧菜单 */

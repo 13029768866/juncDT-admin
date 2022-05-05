@@ -7,12 +7,17 @@
     "
   >
     <el-menu-item :index="resolvePath(onlyOneChild.path)">
+      <!-- icon -->
+      <div class="el-icon" v-show="props.item.meta.icon">
+        <IconifyIconOffline :icon="props.item.meta.icon" />
+      </div>
+      <!-- title -->
       <template #title>
         <div>
           <el-tooltip placement="top" :offset="-10" :disabled="!onlyOneChild.showTooltip">
-            <!--            <template #content>
-              {{ onlyOneChild.meta.title }}
-            </template>-->
+            <!--            <template #content>-->
+            <!--              {{ onlyOneChild.meta.title }}-->
+            <!--            </template>-->
             <span ref="menuTextRef">
               {{ transformI18n(onlyOneChild.meta.title, onlyOneChild.meta.i18n) }}
             </span>

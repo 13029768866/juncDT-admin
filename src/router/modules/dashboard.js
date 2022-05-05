@@ -7,6 +7,7 @@ const dashboardRouter = {
   redirect: '/dashboard',
   component: Layout,
   meta: {
+    icon: 'setting',
     title: $t('menus.workbench'),
     i18n: true,
     rank: 0,

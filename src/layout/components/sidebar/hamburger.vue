@@ -45,10 +45,9 @@
     vertical-align: middle;
     width: 20px;
     height: 20px;
-    transform: rotate(180deg);
   }
 
   .is-active {
-    transform: rotate(0deg);
+    transform: rotate(180deg);
   }
 </style>

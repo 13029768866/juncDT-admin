@@ -13,6 +13,5 @@
     position: relative;
     overflow-x: hidden;
     padding-top: 85px;
-    border: 1px solid red;
   }
 </style>

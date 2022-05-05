@@ -1,6 +1,6 @@
 <template>
   <div class="navbar">
-    <Hamburger class="hamburger-container" :is-active="isCollapse" @toggleClick="toggleSideBar" />
+    <Hamburger class="hamburger-container" :is-active="!isCollapse" @toggleClick="toggleSideBar" />
     <div class="vertical-header-right">
       <!--  全屏  -->
       <screenfull />
@@ -59,6 +59,8 @@
   import avatars from '/@/assets/avatars.webp';
 
   const instance = getCurrentInstance().appContext.config.globalProperties.$storage;
+  const { isCollapse, toggleSideBar } = useNav();
+
   /* 国际化start */
   const { t, availableLocales, locale } = useI18n();
   const toggleLocales = () => {
@@ -67,8 +69,6 @@
     instance.locale = { locale: locale.value };
   };
   /* 国际化end */
-
-  const { isCollapse, toggleSideBar } = useNav();
 </script>
 
 <style lang="scss" scoped>
