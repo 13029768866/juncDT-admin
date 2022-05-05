@@ -1,10 +1,6 @@
 <template>
   <div class="navbar">
-    <Hamburger
-      class="hamburger-container"
-      :is-active="wrApp.sidebar.opened"
-      @toggleClick="toggleSideBar"
-    />
+    <Hamburger class="hamburger-container" :is-active="isCollapse" @toggleClick="toggleSideBar" />
     <div class="vertical-header-right">
       <!--  全屏  -->
       <screenfull />
@@ -72,7 +68,7 @@
   };
   /* 国际化end */
 
-  const { wrApp, toggleSideBar } = useNav();
+  const { isCollapse, toggleSideBar } = useNav();
 </script>
 
 <style lang="scss" scoped>

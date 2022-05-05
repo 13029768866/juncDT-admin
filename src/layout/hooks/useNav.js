@@ -33,12 +33,16 @@ export function useNav() {
   };
 
   /* 侧边栏切换 */
+  const isCollapse = computed(() => {
+    return !wrApp.getSidebarStatus;
+  });
   const toggleSideBar = () => {
     wrApp.toggleSideBar();
   };
 
   return {
     wrApp,
+    isCollapse,
     menuSelect,
     toggleSideBar,
   };

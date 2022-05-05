@@ -24,9 +24,11 @@
   import { useI18n } from 'vue-i18n';
   const { t } = useI18n();
 
-  // eslint-disable-next-line vue/valid-define-props
-  const props = withDefaults(defineProps(), {
-    isActive: false,
+  const props = defineProps({
+    isActive: {
+      type: Boolean,
+      default: () => false,
+    },
   });
 
   const fillColor = ref('');
@@ -43,9 +45,10 @@
     vertical-align: middle;
     width: 20px;
     height: 20px;
+    transform: rotate(180deg);
   }
 
   .is-active {
-    transform: rotate(180deg);
+    transform: rotate(0deg);
   }
 </style>

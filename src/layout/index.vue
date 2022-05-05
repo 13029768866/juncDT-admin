@@ -1,5 +1,5 @@
 <template>
-  <div class="app-wrapper">
+  <div :class="['app-wrapper', set.classes]">
     <!--  侧边栏  -->
     <Vertical />
     <!--  main容器  -->
@@ -13,9 +13,25 @@
 </template>
 
 <script setup>
+  import { useAppStoreHook } from '/@/store/modules/app';
+
   import Vertical from './components/sidebar/vertical.vue';
   import LayoutHeader from './components/layoutHeader.vue';
   import AppMain from './components/appMain.vue';
+
+  /* 配置 */
+  const set = reactive({
+    sidebar: computed(() => {
+      return useAppStoreHook().sidebar;
+    }),
+    classes: computed(() => {
+      return {
+        hideSidebar: !set.sidebar.opened,
+        openSidebar: set.sidebar.opened,
+        withoutAnimation: set.sidebar.withoutAnimation,
+      };
+    }),
+  });
 </script>
 
 <style lang="scss" scoped>

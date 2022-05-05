@@ -3,6 +3,7 @@
     <el-scrollbar wrap-class="scrollbar-wrapper">
       <el-menu
         :default-active="route.path"
+        :collapse="isCollapse"
         unique-opened
         :collapse-transition="false"
         router
@@ -32,13 +33,12 @@
   const route = useRoute();
   const routers = useRouter().options.routes;
   /* menu操作 start */
-  const { menuSelect } = useNav();
+  const { isCollapse, menuSelect } = useNav();
 
   // 菜单数据
   const menuData = computed(() => {
     return usePermissionStoreHook().wholeMenus;
   });
-  console.log('菜单数据', menuData.value);
   /* menu操作 end */
 </script>
 

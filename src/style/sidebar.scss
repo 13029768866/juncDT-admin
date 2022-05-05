@@ -25,6 +25,13 @@
     overflow: hidden;
     box-shadow: 0 0 1px #888;
     transition: width 0.28s;
+
+    // 消除menu边线
+    .el-menu {
+      border: none;
+      height: 100%;
+      background-color: transparent !important;
+    }
   }
   .scrollbar-wrapper {
     overflow-x: hidden !important;
@@ -45,4 +52,58 @@
 body[layout='vertical'] {
   $sideBarWidth: 210px;
   @include merge-style($sideBarWidth);
+
+  // 侧边栏(折叠)
+  .el-menu--collapse {
+    width: 54px;
+  }
+  // 隐藏侧边栏
+  .hideSidebar {
+    .fixed-header {
+      width: calc(100% - 54px);
+      transition: width 0.28s;
+    }
+
+    .sidebar-container {
+      width: 54px !important;
+    }
+
+    .main-container {
+      margin-left: 54px;
+    }
+
+    .submenu-title-noDropdown {
+      padding: 0 !important;
+      position: relative;
+
+      .el-tooltip {
+        padding: 0 !important;
+      }
+    }
+  }
+
+  /* 菜单折叠 */
+  .el-menu--collapse {
+    .el-sub-menu {
+      & > .el-sub-menu__title {
+        & > span {
+          height: 0;
+          width: 0;
+          overflow: hidden;
+          visibility: hidden;
+          display: inline-block;
+        }
+      }
+    }
+
+    /* 有无子菜单 */
+    .el-sub-menu__title,
+    .el-menu-item [class^='el-icon'] {
+      right: 5px;
+    }
+
+    .submenu-title-noDropdown {
+      background: transparent !important;
+    }
+  }
 }
