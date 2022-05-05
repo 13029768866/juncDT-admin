@@ -7,7 +7,7 @@ const errorRouter = {
   component: Layout,
   redirect: '/error/403',
   meta: {
-    icon: 'information-line',
+    icon: 'check',
     title: $t('menus.error'),
     i18n: true,
     rank: 9,

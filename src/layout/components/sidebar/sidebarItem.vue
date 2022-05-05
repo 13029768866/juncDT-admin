@@ -31,6 +31,10 @@
   <el-sub-menu v-else popper-append-to-body :index="resolvePath(props.item.path)">
     <template #title>
       <!--  icon  -->
+      <div v-show="props.item.meta.icon" :class="['el-icon', props.item.meta.icon]">
+        <IconifyIconOffline :icon="props.item.meta.icon" />
+      </div>
+      <!-- title -->
       <el-tooltip placement="top" :offset="-10" :disabled="!props.item.showTooltip">
         <div ref="menuTextRef">
           <span>
