@@ -4,3 +4,7 @@ buttons:
   systemSettings: 打开项目配置
 menus:
   workbench: 工作台
+  error: 错误页
+  FourZeroFour: "404"
+  FourZeroThree: "403"
+  FiveZeroZero: "500"

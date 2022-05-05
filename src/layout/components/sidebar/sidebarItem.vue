@@ -23,23 +23,31 @@
   </template>
 
   <!--  存在子路由 -->
-  <!--  <el-sub-menu v-else popper-append-to-body :index="resolvePath(props.item.path)">-->
-  <!--    &lt;!&ndash;    <template #title>&ndash;&gt;-->
-  <!--    &lt;!&ndash;      &lt;!&ndash;  icon  &ndash;&gt;&ndash;&gt;-->
-  <!--    &lt;!&ndash;    </template>&ndash;&gt;-->
-  <!--    &lt;!&ndash;    <sidebar-item&ndash;&gt;-->
-  <!--    &lt;!&ndash;      v-for="child in props.item.children"&ndash;&gt;-->
-  <!--    &lt;!&ndash;      :key="child.path"&ndash;&gt;-->
-  <!--    &lt;!&ndash;      :is-nest="true"&ndash;&gt;-->
-  <!--    &lt;!&ndash;      :item="child"&ndash;&gt;-->
-  <!--    &lt;!&ndash;      :base-path="resolvePath(child.path)"&ndash;&gt;-->
-  <!--    &lt;!&ndash;      class="nest-menu"&ndash;&gt;-->
-  <!--    &lt;!&ndash;    />&ndash;&gt;-->
-  <!--  </el-sub-menu>-->
+  <el-sub-menu v-else popper-append-to-body :index="resolvePath(props.item.path)">
+    <template #title>
+      <!--  icon  -->
+      <el-tooltip placement="top" :offset="-10" :disabled="!props.item.showTooltip">
+        <div ref="menuTextRef">
+          <span>
+            {{ transformI18n(props.item.meta.title, props.item.meta.i18n) }}
+          </span>
+        </div>
+      </el-tooltip>
+    </template>
+    <sidebar-item
+      v-for="child in props.item.children"
+      :key="child.path"
+      :is-nest="true"
+      :item="child"
+      :base-path="resolvePath(child.path)"
+      class="nest-menu"
+    />
+  </el-sub-menu>
 </template>
 
 <script setup>
   import { transformI18n } from '/@/plugins/i18n';
+  import path from 'path';
 
   const props = defineProps({
     item: {
@@ -56,7 +64,7 @@
   });
   /* 菜单子路由处理 */
   const onlyOneChild = ref(null);
-  const hasOneShowingChild = (children, parent) => {
+  const hasOneShowingChild = (children = [], parent) => {
     const showingChildren = children.filter((item) => {
       onlyOneChild.value = item;
       return true;
@@ -84,7 +92,7 @@
     if (httpReg.test(routePath) || httpReg.test(props.basePath)) {
       return routePath || props.basePath;
     } else {
-      return routePath;
+      return path.resolve(props.basePath, routePath);
     }
   };
 </script>

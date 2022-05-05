@@ -4,3 +4,7 @@ buttons:
   systemSettings: Open ProjectConfig
 menus:
   workbench: Workbench
+  error: Error Page
+  FourZeroFour: "404"
+  FourZeroThree: "403"
+  FiveZeroZero: "500"
