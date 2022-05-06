@@ -20,3 +20,15 @@ src/plugins/ i18n: 混合框架国际化
    computed(() => { return { hideSidebar: !set.sidebar.opened, openSidebar: set.sidebar.opened,
    withoutAnimation: set.sidebar.withoutAnimation, }; }), });
    ```
+
+## 系统配置项
+
+### 全局注入
+
+#### 响应式 storage
+
+1. 位置 utils/storage/responsive.js
+2. 国际化 locale
+3. 布局和主题 layout
+
+### 日夜模式

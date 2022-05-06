@@ -18,7 +18,7 @@ const errorRouter = {
       name: '403',
       component: () => import('/@/views/error/403.vue'),
       meta: {
-        title: $t('menus.FourZeroFour'),
+        title: $t('menus.FourZeroThree'),
         i18n: true,
       },
     },
@@ -27,7 +27,7 @@ const errorRouter = {
       name: '404',
       component: () => import('/@/views/error/404.vue'),
       meta: {
-        title: $t('menus.FourZeroThree'),
+        title: $t('menus.FourZeroFour'),
         i18n: true,
       },
     },
