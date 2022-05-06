@@ -36,7 +36,7 @@
       </div>
       <!-- title -->
       <el-tooltip placement="top" :offset="-10" :disabled="!props.item.showTooltip">
-        <div ref="menuTextRef">
+        <div ref="menuTextRef" overflow="hidden" :style="getSubTextStyle">
           <span>
             {{ transformI18n(props.item.meta.title, props.item.meta.i18n) }}
           </span>
@@ -55,9 +55,12 @@
 </template>
 
 <script setup>
-  import { transformI18n } from '/@/plugins/i18n';
   import path from 'path';
 
+  import { transformI18n } from '/@/plugins/i18n';
+  import { useNav } from '../../hooks/useNav';
+
+  const { wrApp } = useNav();
   const props = defineProps({
     item: {
       type: Object,
@@ -104,4 +107,11 @@
       return path.resolve(props.basePath, routePath);
     }
   };
+
+  /* 样式控制 */
+  const getSubTextStyle = computed(() => {
+    return {
+      width: wrApp.sidebar.opened ? '125px' : '',
+    };
+  });
 </script>
