@@ -7,8 +7,11 @@
       <div class="fixed-header">
         <layout-header />
       </div>
+      <!--  主题内容  -->
       <app-main />
     </div>
+    <!-- 系统设置 -->
+    <Setting />
   </div>
 </template>
 
@@ -18,6 +21,7 @@
   import Vertical from './components/sidebar/vertical.vue';
   import LayoutHeader from './components/layoutHeader.vue';
   import AppMain from './components/appMain.vue';
+  import Setting from './components/setting/index.vue';
 
   /* 配置选项 */
   const set = reactive({

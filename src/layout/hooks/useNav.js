@@ -1,5 +1,6 @@
 import { remainingPaths } from '/@/router';
 import { useAppStoreHook } from '/@/store/modules/app';
+import { events } from '/@/utils/mitt';
 
 export function useNav() {
   const wrApp = useAppStoreHook();
@@ -36,6 +37,11 @@ export function useNav() {
   const isCollapse = computed(() => {
     return !wrApp.getSidebarStatus;
   });
+
+  /* 打开项目配置 */
+  const openPanel = () => {
+    events.emit('openPanel');
+  };
   const toggleSideBar = () => {
     wrApp.toggleSideBar();
   };
@@ -43,6 +49,7 @@ export function useNav() {
   return {
     wrApp,
     isCollapse,
+    openPanel,
     menuSelect,
     toggleSideBar,
   };

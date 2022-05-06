@@ -24,7 +24,7 @@
           </el-dropdown-menu>
         </template>
       </el-dropdown>
-      <!--  设置  -->
+      <!--  退出登录  -->
       <el-dropdown trigger="click">
         <span class="el-dropdown-link">
           <img :src="avatars" />
@@ -42,7 +42,7 @@
         <!--        </template>-->
       </el-dropdown>
       <!--  设置  -->
-      <span class="el-icon-setting" :title="t('buttons.systemSettings')">
+      <span class="el-icon-setting" :title="t('buttons.systemSettings')" @click="openPanel">
         <IconifyIconOffline icon="setting" />
       </span>
     </div>
@@ -59,7 +59,7 @@
   import avatars from '/@/assets/avatars.webp';
 
   const instance = getCurrentInstance().appContext.config.globalProperties.$storage;
-  const { isCollapse, toggleSideBar } = useNav();
+  const { isCollapse, openPanel, toggleSideBar } = useNav();
 
   /* 国际化start */
   const { t, availableLocales, locale } = useI18n();

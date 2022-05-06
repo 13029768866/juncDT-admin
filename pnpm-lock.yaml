@@ -25,6 +25,7 @@ specifiers:
   lodash: ^4.17.21
   lodash-es: ^4.17.21
   lodash-unified: ^1.0.2
+  mitt: ^3.0.0
   nprogress: ^0.2.0
   path: ^0.12.7
   pinia: ^2.0.13
@@ -59,6 +60,7 @@ dependencies:
   lodash: 4.17.21
   lodash-es: 4.17.21
   lodash-unified: 1.0.2_lodash-es@4.17.21+lodash@4.17.21
+  mitt: 3.0.0
   nprogress: 0.2.0
   path: 0.12.7
   pinia: 2.0.13_vue@3.2.33
@@ -3194,6 +3196,10 @@ packages:
   /minimist/1.2.6:
     resolution: {integrity: sha512-Jsjnk4bw3YJqYzbdyBiNsPWHPfO++UGG749Cxs6peCu5Xg4nrena6OVxOYxrQTqww0Jmwt+Ref8rggumkTLz9Q==}
     dev: true
+
+  /mitt/3.0.0:
+    resolution: {integrity: sha512-7dX2/10ITVyqh4aOSVI9gdape+t9l2/8QxHrFmUXu4EEUpdlxl6RudZUPZoc+zuY2hk1j7XxVroIVIan/pD/SQ==}
+    dev: false
 
   /mkdirp/0.5.6:
     resolution: {integrity: sha512-FP+p8RB8OWpF3YZBCrP5gtADmtXApB5AMLn+vdyA+PyxCjrCs00mjyUozssO33cwDeT3wNGdLxJ5M//YqtHAJw==}

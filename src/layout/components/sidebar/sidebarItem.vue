@@ -1,57 +1,58 @@
 <template>
-  <!--  没有子路由 -->
-  <template
-    v-if="
-      hasOneShowingChild(props.item.children, props.item) &&
-      (!onlyOneChild.children || onlyOneChild.noShowingChildren)
-    "
-  >
-    <el-menu-item :index="resolvePath(onlyOneChild.path)">
-      <!-- icon -->
-      <div class="el-icon" v-show="props.item.meta.icon">
-        <IconifyIconOffline :icon="props.item.meta.icon" />
-      </div>
-      <!-- title -->
-      <template #title>
-        <div>
-          <el-tooltip placement="top" :offset="-10" :disabled="!onlyOneChild.showTooltip">
-            <!--            <template #content>-->
-            <!--              {{ onlyOneChild.meta.title }}-->
-            <!--            </template>-->
-            <span ref="menuTextRef">
-              {{ transformI18n(onlyOneChild.meta.title, onlyOneChild.meta.i18n) }}
-            </span>
-          </el-tooltip>
+  <div>
+    <!--  没有子路由 -->
+    <template
+      v-if="
+        hasOneShowingChild(props.item.children, props.item) &&
+        (!onlyOneChild.children || onlyOneChild.noShowingChildren)
+      "
+    >
+      <el-menu-item :index="resolvePath(onlyOneChild.path)">
+        <!-- icon -->
+        <div class="el-icon" v-show="props.item.meta.icon">
+          <IconifyIconOffline :icon="props.item.meta.icon" />
         </div>
-      </template>
-    </el-menu-item>
-  </template>
-
-  <!--  存在子路由 -->
-  <el-sub-menu v-else popper-append-to-body :index="resolvePath(props.item.path)">
-    <template #title>
-      <!--  icon  -->
-      <div v-show="props.item.meta.icon" :class="['el-icon', props.item.meta.icon]">
-        <IconifyIconOffline :icon="props.item.meta.icon" />
-      </div>
-      <!-- title -->
-      <el-tooltip placement="top" :offset="-10" :disabled="!props.item.showTooltip">
-        <div ref="menuTextRef" overflow="hidden" :style="getSubTextStyle">
-          <span>
-            {{ transformI18n(props.item.meta.title, props.item.meta.i18n) }}
-          </span>
-        </div>
-      </el-tooltip>
+        <!-- title -->
+        <template #title>
+          <div>
+            <el-tooltip placement="top" :offset="-10" :disabled="!onlyOneChild.showTooltip">
+              <!--            <template #content>-->
+              <!--              {{ onlyOneChild.meta.title }}-->
+              <!--            </template>-->
+              <span ref="menuTextRef">
+                {{ transformI18n(onlyOneChild.meta.title, onlyOneChild.meta.i18n) }}
+              </span>
+            </el-tooltip>
+          </div>
+        </template>
+      </el-menu-item>
     </template>
-    <sidebar-item
-      v-for="child in props.item.children"
-      :key="child.path"
-      :is-nest="true"
-      :item="child"
-      :base-path="resolvePath(child.path)"
-      class="nest-menu"
-    />
-  </el-sub-menu>
+    <!--  存在子路由 -->
+    <el-sub-menu v-else popper-append-to-body :index="resolvePath(props.item.path)">
+      <template #title>
+        <!--  icon  -->
+        <div v-show="props.item.meta.icon" :class="['el-icon', props.item.meta.icon]">
+          <IconifyIconOffline :icon="props.item.meta.icon" />
+        </div>
+        <!-- title -->
+        <el-tooltip placement="top" :offset="-10" :disabled="!props.item.showTooltip">
+          <div ref="menuTextRef" overflow="hidden" :style="getSubTextStyle">
+            <span>
+              {{ transformI18n(props.item.meta.title, props.item.meta.i18n) }}
+            </span>
+          </div>
+        </el-tooltip>
+      </template>
+      <sidebar-item
+        v-for="child in props.item.children"
+        :key="child.path"
+        :is-nest="true"
+        :item="child"
+        :base-path="resolvePath(child.path)"
+        class="nest-menu"
+      />
+    </el-sub-menu>
+  </div>
 </template>
 
 <script setup>
@@ -114,4 +115,7 @@
       width: wrApp.sidebar.opened ? '125px' : '',
     };
   });
+
+  // 存储菜单文本dom元素
+  const menuTextRef = ref(null);
 </script>
