@@ -40,7 +40,7 @@
     setLayoutThemeColor();
   };
   /* 主题end */
-  console.log('instance', instance);
+  // console.log('instance', instance);
 </script>
 
 <style lang="scss" scoped>
