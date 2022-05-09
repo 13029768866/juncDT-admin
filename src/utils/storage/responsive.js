@@ -2,6 +2,7 @@
 import Storage from 'responsive-storage';
 
 export const injectResponsiveStorage = (app, config = {}) => {
+  console.log('responsive layout', Storage.getData(undefined, 'layout'));
   const configObj = Object.assign({
     // 国际化
     locale: {
@@ -14,7 +15,9 @@ export const injectResponsiveStorage = (app, config = {}) => {
     layout: {
       type: Object,
       default: Storage.getData(undefined, 'layout') ?? {
+        theme: config.Theme ?? 'default',
         darkMode: config.DarkMode ?? false, // 夜间模式
+        sidebarStatus: config.SidebarStatus ?? true,
       },
     },
   });

@@ -22,11 +22,10 @@ app.component('IconifyIconOffline', IconifyIconOffline);
 
 // 注册自定义指令 todo
 
-getServerConfig(app).then(async () => {
-  // console.log(config);
+getServerConfig(app).then(async (config) => {
   app.use(router);
   await router.isReady();
-  injectResponsiveStorage(app);
+  injectResponsiveStorage(app, config);
   setupStore(app);
   app.use(useI18n);
   app.mount('#app');

@@ -23,7 +23,6 @@ export const usePermissionStore = defineStore({
       if (this.wholeMenus.length > 0) return;
       const wholeMenus = filterTree(ascending(this.constantMenus.concat(routes)));
       this.wholeMenus = wholeMenus;
-      console.log('wholeMenus', this.wholeMenus);
       this.menusTree = cloneDeep(wholeMenus);
 
       const getButtonAuth = (arrRoutes) => {

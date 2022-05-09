@@ -7,7 +7,10 @@
         (!onlyOneChild.children || onlyOneChild.noShowingChildren)
       "
     >
-      <el-menu-item :index="resolvePath(onlyOneChild.path)">
+      <el-menu-item
+        :index="resolvePath(onlyOneChild.path)"
+        :class="{ 'submenu-title-noDropdown': !isNest }"
+      >
         <!-- icon -->
         <div class="el-icon" v-show="props.item.meta.icon">
           <IconifyIconOffline :icon="props.item.meta.icon" />

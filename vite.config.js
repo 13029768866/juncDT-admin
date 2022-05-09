@@ -58,7 +58,6 @@ export default defineConfig(({ command, mode }) => {
       host: '0.0.0.0',
       port: VITE_PORT,
       https: false,
-      open: true,
       // 本地跨域代理（todo）
     },
     // 构建选项
