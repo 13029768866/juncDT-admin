@@ -32,3 +32,9 @@ src/plugins/ i18n: 混合框架国际化
 3. 布局和主题 layout
 
 ### 日夜模式
+
+### element-plus 颜色修改
+
+1.  `css-color-function`
+2.  `rgb-hex`
+3.  `@ctrl/tinycolor`

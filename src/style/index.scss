@@ -56,3 +56,8 @@ ul {
   padding: 0;
   list-style: none;
 }
+
+/* 灰色模式 */
+.html-grey {
+  filter: grayscale(100%);
+}

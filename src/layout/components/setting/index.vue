@@ -24,12 +24,60 @@
         </el-icon>
       </li>
     </ul>
+
+    <!-- 界面显示 -->
+    <el-divider>界面显示</el-divider>
+    <ul class="setting">
+      <li v-show="!dataTheme">
+        <span>灰色模式</span>
+        <el-switch
+          v-model="settings.greyVal"
+          inline-prompt
+          inactive-color="#a6a6a6"
+          active-text="开"
+          inactive-text="关"
+          @change="greyChange"
+        />
+      </li>
+      <li>
+        <span>侧边栏Logo</span>
+        <el-switch
+          v-model="logoVal"
+          inline-prompt
+          :active-value="true"
+          :inactive-value="false"
+          inactive-color="#a6a6a6"
+          active-text="开"
+          inactive-text="关"
+          @change="logoChange"
+        />
+      </li>
+      <li>
+        <span>隐藏标签页</span>
+        <el-switch
+          v-model="settings.tabsVal"
+          inline-prompt
+          inactive-color="#a6a6a6"
+          active-text="开"
+          inactive-text="关"
+          @change="tagsChange"
+        />
+      </li>
+    </ul>
   </panel>
 </template>
 
 <script setup>
+  import { find } from 'lodash-unified';
+
   import { storageLocal } from '/@/utils/storage';
   import { toggleTheme } from '@pureadmin/theme/dist/browser-utils';
+  import { events } from '/@/utils/mitt';
+  import { getConfig } from '/@/config';
+  import { createNewStyle, writeNewStyle, shadeBgColor } from '../../theme/element-plus';
+
+  import { useEpThemeStoreHook } from '/@/store/modules/epTheme';
+
   import panel from '../panel/index.vue';
 
   import dayIcon from '/@/assets/svg/day.svg?component';
@@ -61,6 +109,13 @@
       darkMode: dataTheme.value,
       sidebarStatus: instance.layout.sidebarStatus,
     };
+
+    if (theme === 'default' || theme === 'light') {
+      setEpThemeColor(getConfig().EpThemeColor);
+    } else {
+      const colors = find(themeColors.value, { themeColor: theme });
+      setEpThemeColor(colors.color);
+    }
   };
   const dataThemeChange = () => {
     if (dataTheme.value) {
@@ -101,6 +156,13 @@
     // 深紫罗兰色
     { color: '#722ed1', themeColor: 'saucePurple' },
   ]);
+  // 设置element-plus主题色
+  const setEpThemeColor = (color) => {
+    writeNewStyle(createNewStyle(color));
+    useEpThemeStoreHook().setStoreEpThemeColor(color);
+    body.style.setProperty('--el-color-primary-active', shadeBgColor(color));
+  };
+
   const getThemeColorStyle = computed(() => {
     return (color) => ({ background: color });
   });
@@ -116,8 +178,48 @@
     };
   });
   /* 主题end */
-  // console.log('instance', instance);
 
+  /* layout start */
+  const settings = reactive({
+    greyVal: instance.configure.grey,
+    tabsVal: instance.configure.hideTabs,
+    showLogo: instance.configure.showLogo,
+  });
+  const logoVal = ref(instance.configure?.showLogo ?? true);
+
+  function storageConfigureChange(key, val) {
+    const storageConfigure = instance.configure;
+    storageConfigure[key] = val;
+    instance.configure = storageConfigure;
+  }
+  function toggleClass(flag, clsName, target) {
+    const targetEl = target || document.body;
+    let { className } = targetEl;
+    className = className.replace(clsName, '').trim();
+    targetEl.className = flag ? `${className} ${clsName} ` : className;
+  }
+
+  // 灰色模式设置
+  const greyChange = (value) => {
+    toggleClass(settings.greyVal, 'html-grey', document.querySelector('html'));
+    storageConfigureChange('grey', value);
+  };
+
+  // logo切换
+  function logoChange() {
+    unref(logoVal)
+      ? storageConfigureChange('showLogo', true)
+      : storageConfigureChange('showLogo', false);
+    events.emit('logoChange', unref(logoVal));
+  }
+
+  // tag栏切换
+  const tagsChange = () => {
+    let showVal = settings.tabsVal;
+    storageConfigureChange('hideTabs', showVal);
+    events.emit('tagViewsChange', showVal);
+  };
+  /* layout end */
   // 初始化项目配置
   nextTick(() => {
     console.log('setting init', instance);
@@ -161,5 +263,16 @@
   :deep(.el-divider__text) {
     font-size: 16px;
     font-weight: 700;
+  }
+
+  .setting {
+    width: 100%;
+
+    li {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin: 25px;
+    }
   }
 </style>

@@ -5,7 +5,7 @@ import { cloneDeep } from 'lodash-unified';
 import { ascending, filterTree } from '/@/router/utils';
 
 export const usePermissionStore = defineStore({
-  id: 'wzj-permission',
+  id: 'WR-permission',
   state: () => ({
     // 静态路由菜单
     constantMenus,

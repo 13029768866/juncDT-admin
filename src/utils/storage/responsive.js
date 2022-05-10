@@ -18,6 +18,16 @@ export const injectResponsiveStorage = (app, config = {}) => {
         theme: config.Theme ?? 'default',
         darkMode: config.DarkMode ?? false, // 夜间模式
         sidebarStatus: config.SidebarStatus ?? true,
+        epThemeColor: config.EpThemeColor ?? '#409EFF',
+      },
+    },
+    // 页面配置项
+    configure: {
+      type: Object,
+      default: Storage.getData(undefined, 'configure') ?? {
+        grey: config.Grey ?? false,
+        showLogo: config.ShowLogo ?? true,
+        hideTabs: config.HideTabs ?? false,
       },
     },
   });
