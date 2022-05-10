@@ -1,5 +1,6 @@
 <template>
   <div :class="['sidebar-container']">
+    <Logo v-if="showLogo" :collapse="isCollapse" />
     <el-scrollbar wrap-class="scrollbar-wrapper">
       <el-menu
         :default-active="route.path"
@@ -23,10 +24,14 @@
 </template>
 
 <script setup>
-  import SidebarItem from './sidebarItem.vue';
+  import { usePermissionStoreHook } from '/@/store/modules/permission';
+  import { storageLocal } from '/@/utils/storage';
+  import { events } from '/@/utils/mitt';
 
   import { useNav } from '../../hooks/useNav';
-  import { usePermissionStoreHook } from '/@/store/modules/permission';
+
+  import SidebarItem from './sidebarItem.vue';
+  import Logo from './logo.vue';
 
   window.document.body.setAttribute('layout', 'vertical');
 
@@ -39,7 +44,14 @@
   const menuData = computed(() => {
     return usePermissionStoreHook().wholeMenus;
   });
+  const showLogo = ref(storageLocal.getItem('responsive-configure')?.showLogo ?? true);
   /* menu操作 end */
+
+  onBeforeMount(() => {
+    events.on('logoChange', (key) => {
+      showLogo.value = key;
+    });
+  });
 </script>
 
 <style lang="scss" scoped></style>

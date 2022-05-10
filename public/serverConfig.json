@@ -1,6 +1,6 @@
 {
   "Version": "0.0.1",
-  "Title": "WRAdmin",
+  "Title": "JuncDT-Admin",
   "FixedHeader": true,
   "HiddenSideBar": false,
   "MultiTagsCache": false,
@@ -17,4 +17,5 @@
   "ShowLogo": true,
   "ShowModel": "smart"
 }
+
 

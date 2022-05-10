@@ -2,7 +2,6 @@
 import Storage from 'responsive-storage';
 
 export const injectResponsiveStorage = (app, config = {}) => {
-  console.log('responsive layout', Storage.getData(undefined, 'layout'));
   const configObj = Object.assign({
     // 国际化
     locale: {
