@@ -3,6 +3,7 @@
     p="x-15px"
     :title="props.isActive ? t('buttons.collapse') : t('buttons.expand')"
     @click="toggleClick"
+    @mouseenter="fillColor = useEpThemeStoreHook().epThemeColor"
     @mouseleave="fillColor = ''"
   >
     <svg
@@ -21,6 +22,7 @@
 </template>
 
 <script setup>
+  import { useEpThemeStoreHook } from '/@/store/modules/epTheme';
   import { useI18n } from 'vue-i18n';
   const { t } = useI18n();
 

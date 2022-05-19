@@ -20,10 +20,10 @@ export function useNav() {
             findCurrentRoute(item.redirect, item.children);
           } else {
             /* 切换左侧菜单 通知标签页 */
-            // emitter.emit('changLayoutRoute', {
-            //   indexPath,
-            //   parentPath,
-            // });
+            events.emit('changLayoutRoute', {
+              indexPath,
+              parentPath,
+            });
           }
         } else {
           if (item.children) findCurrentRoute(indexPath, item.children);

@@ -5,6 +5,7 @@ specifiers:
   '@commitlint/config-conventional': ^16.2.1
   '@ctrl/tinycolor': ^3.4.1
   '@iconify-icons/ep': ^1.2.4
+  '@iconify-icons/ri': ^1.2.1
   '@iconify/vue': ^3.2.1
   '@intlify/vite-plugin-vue-i18n': ^3.4.0
   '@pureadmin/theme': ^1.1.0
@@ -80,6 +81,7 @@ devDependencies:
   '@commitlint/cli': 16.2.3
   '@commitlint/config-conventional': 16.2.1
   '@iconify-icons/ep': 1.2.4
+  '@iconify-icons/ri': 1.2.1
   '@iconify/vue': 3.2.1_vue@3.2.33
   '@intlify/vite-plugin-vue-i18n': 3.4.0_vite@2.9.5+vue-i18n@9.1.9
   '@pureadmin/theme': 1.1.0
@@ -644,6 +646,12 @@ packages:
 
   /@iconify-icons/ep/1.2.4:
     resolution: {integrity: sha512-EmNFcajYB1ZfvviG6296NtfMlg0Q+w619qx/0H+tUaVxHIlChPlmOYMKRiOPKeNTvoFgEN+u5jbYxMWBqSWYDg==}
+    dependencies:
+      '@iconify/types': 1.1.0
+    dev: true
+
+  /@iconify-icons/ri/1.2.1:
+    resolution: {integrity: sha512-8VlUg6xrRz2BWmwulF6aWnb138NzkLhBJZ36Pu/9qjpTwwLyFi+Wgg1+LeMvOBXySiD/H/bTQh7Lay73uiN61A==}
     dependencies:
       '@iconify/types': 1.1.0
     dev: true

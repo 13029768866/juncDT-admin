@@ -1,6 +1,8 @@
 <template>
   <div class="navbar">
     <Hamburger class="hamburger-container" :is-active="!isCollapse" @toggleClick="toggleSideBar" />
+    <!-- 面包屑 -->
+    <!--    <Breadcrumb class="breadcrumb-container"></Breadcrumb>-->
     <div class="vertical-header-right">
       <!--  全屏  -->
       <screenfull />
@@ -55,6 +57,7 @@
 
   import Screenfull from '../components/screenfull/index.vue';
   import Hamburger from './sidebar/hamburger.vue';
+  // import Breadcrumb from './sidebar/breadCrumb.vue';
   import globalization from '/@/assets/svg/globalization.svg?component';
   import avatars from '/@/assets/avatars.webp';
 
@@ -160,6 +163,10 @@
           background: #f6f6f6;
         }
       }
+    }
+
+    .breadcrumb-container {
+      float: left;
     }
   }
 

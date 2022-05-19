@@ -10,6 +10,31 @@
       @change="dataThemeChange"
     ></el-switch>
 
+    <el-divider>导航栏模式</el-divider>
+    <ul class="wr-theme">
+      <el-tooltip class="item" content="左侧模式" placement="bottom">
+        <li
+          :class="layoutTheme.layout === 'vertical' ? $style.isSelect : ''"
+          ref="verticalRef"
+          @click="setLayoutModel('vertical')"
+        >
+          <div />
+          <div />
+        </li>
+      </el-tooltip>
+
+      <el-tooltip class="item" content="顶部模式" placement="bottom">
+        <li
+          :class="layoutTheme.layout === 'horizontal' ? $style.isSelect : ''"
+          ref="horizontalRef"
+          @click="setLayoutModel('horizontal')"
+        >
+          <div />
+          <div />
+        </li>
+      </el-tooltip>
+    </ul>
+
     <!-- 主题色 -->
     <el-divider v-show="!dataTheme">主题色</el-divider>
     <ul class="theme-color" v-show="!dataTheme">
@@ -63,6 +88,17 @@
           @change="tagsChange"
         />
       </li>
+      <li>
+        <span>标签页持久化</span>
+        <el-switch
+          v-model="settings.multiTagsCache"
+          inline-prompt
+          inactive-color="#a6a6a6"
+          active-text="开"
+          inactive-text="关"
+          @change="multiTagsCacheChange"
+        />
+      </li>
     </ul>
   </panel>
 </template>
@@ -77,6 +113,8 @@
   import { createNewStyle, writeNewStyle, shadeBgColor } from '../../theme/element-plus';
 
   import { useEpThemeStoreHook } from '/@/store/modules/epTheme';
+  import { useMultiTagsStoreHook } from '/@/store/modules/multiTags';
+  import { useAppStoreHook } from '/@/store/modules/app';
 
   import panel from '../panel/index.vue';
 
@@ -94,17 +132,27 @@
       layout: instanceConfig?.Layout ?? 'vertical',
       theme: instanceConfig?.Theme ?? 'default',
     });
+
+  // body添加layout属性，作用于src/style/sidebar.scss
+  if (unref(layoutTheme)) {
+    let { layout } = unref(layoutTheme);
+    let { theme } = unref(layoutTheme);
+    toggleTheme({
+      scopeName: `layout-theme-${theme}`,
+    });
+    setLayoutModel(layout);
+  }
   // 存放夜间主题切换前的导航主题色
   let tempLayoutThemeColor;
   const dataTheme = ref(instance.layout.darkMode);
   const setLayoutThemeColor = (theme) => {
-    console.log('setTheme', instance.layout.theme, theme);
     tempLayoutThemeColor = instance.layout.theme;
     layoutTheme.value.theme = theme;
     toggleTheme({
       scopeName: `layout-theme-${theme}`,
     });
     instance.layout = {
+      layout: useAppStoreHook().layout,
       theme,
       darkMode: dataTheme.value,
       sidebarStatus: instance.layout.sidebarStatus,
@@ -128,9 +176,11 @@
         : setLayoutThemeColor(instance.layout.theme);
 
       instance.layout = {
+        layout: useAppStoreHook().layout,
         theme: instance.layout.theme,
         darkMode: dataTheme.value,
         sidebarStatus: instance.layout.sidebarStatus,
+        epThemeColor: instance.layout.epThemeColor,
       };
     }
   };
@@ -177,6 +227,20 @@
       }
     };
   });
+
+  // 设置导航模式
+  function setLayoutModel(layout) {
+    layoutTheme.value.layout = layout;
+    window.document.body.setAttribute('layout', layout);
+    instance.layout = {
+      layout,
+      theme: layoutTheme.value.theme,
+      darkMode: instance.layout.darkMode,
+      sidebarStatus: instance.layout.sidebarStatus,
+      epThemeColor: instance.layout.epThemeColor,
+    };
+    useAppStoreHook().setLayout(layout);
+  }
   /* 主题end */
 
   /* layout start */
@@ -184,6 +248,7 @@
     greyVal: instance.configure.grey,
     tabsVal: instance.configure.hideTabs,
     showLogo: instance.configure.showLogo,
+    multiTagsCache: instance.configure.multiTagsCache,
   });
   const logoVal = ref(instance.configure?.showLogo ?? true);
 
@@ -219,15 +284,113 @@
     storageConfigureChange('hideTabs', showVal);
     events.emit('tagViewsChange', showVal);
   };
+
+  // 标签缓存
+  const multiTagsCacheChange = () => {
+    let { multiTagsCache } = settings;
+    storageConfigureChange('multiTagsCache', multiTagsCache);
+    useMultiTagsStoreHook().multiTagsCacheChange(multiTagsCache);
+  };
   /* layout end */
   // 初始化项目配置
   nextTick(() => {
-    console.log('setting init', instance);
     dataThemeChange();
+  });
+
+  const verticalRef = templateRef('verticalRef', null);
+  const horizontalRef = templateRef('horizontalRef', null);
+  const { isSelect } = useCssModule();
+
+  watch(instance, ({ layout }) => {
+    switch (layout['layout']) {
+      case 'vertical':
+        toggleClass(true, isSelect, unref(verticalRef));
+        break;
+      case 'horizontal':
+        toggleClass(true, isSelect, unref(horizontalRef));
+        break;
+    }
   });
 </script>
 
+<style scoped module>
+  .isSelect {
+    border: 2px solid var(--el-color-primary);
+  }
+</style>
 <style lang="scss" scoped>
+  .wr-theme {
+    margin-top: 25px;
+    width: 100%;
+    height: 50px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+
+    li {
+      width: 18%;
+      height: 45px;
+      background: #f0f2f5;
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+      border-radius: 4px;
+      box-shadow: 0 1px 2.5px 0 rgb(0 0 0 / 18%);
+
+      &:nth-child(1) {
+        div {
+          &:nth-child(1) {
+            width: 30%;
+            height: 100%;
+            background: #1b2a47;
+          }
+
+          &:nth-child(2) {
+            width: 70%;
+            height: 30%;
+            top: 0;
+            right: 0;
+            background: #fff;
+            box-shadow: 0 0 1px #888;
+            position: absolute;
+          }
+        }
+      }
+
+      &:nth-child(2) {
+        div {
+          &:nth-child(1) {
+            width: 100%;
+            height: 30%;
+            background: #1b2a47;
+            box-shadow: 0 0 1px #888;
+          }
+        }
+      }
+
+      &:nth-child(3) {
+        div {
+          &:nth-child(1) {
+            width: 100%;
+            height: 30%;
+            background: #1b2a47;
+            box-shadow: 0 0 1px #888;
+          }
+
+          &:nth-child(2) {
+            width: 30%;
+            height: 70%;
+            bottom: 0;
+            left: 0;
+            background: #fff;
+            box-shadow: 0 0 1px #888;
+            position: absolute;
+          }
+        }
+      }
+    }
+  }
+
   .theme-mode {
     width: 100%;
     height: 50px;

@@ -6,8 +6,10 @@ import { store } from '/@/store';
 export const useEpThemeStore = defineStore({
   id: 'WR-epTheme',
   state: () => ({
+    // 主题色
     epThemeColor:
       storageLocal.getItem('responsive-layout')?.epThemeColor ?? getConfig().EpThemeColor,
+    // 主题类型
     epTheme: storageLocal.getItem('responsive-layout')?.theme ?? getConfig().Theme,
   }),
   getters: {

@@ -30,6 +30,7 @@ module.exports = {
     'no-undef': 'off', // 禁止使用为什么变量
     'default-case': 'off', // 要求switch语句必须要有default
     'no-plusplus': 'off', // 禁止使用一元操作符
+    'no-useless-escape': 'off',
     'no-param-reassign': 'off', // 禁止分配函数参数
     'no-underscore-dangle': 'off', // 命名下划线
     'class-methods-use-this': 'off', // class 静态方法限制

@@ -33,8 +33,6 @@
   import SidebarItem from './sidebarItem.vue';
   import Logo from './logo.vue';
 
-  window.document.body.setAttribute('layout', 'vertical');
-
   const route = useRoute();
   const routers = useRouter().options.routes;
   /* menu操作 start */

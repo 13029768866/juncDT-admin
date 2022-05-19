@@ -7,14 +7,14 @@
   "KeepAlive": true,
   "Locale": "zh",
   "Layout": "vertical",
-  "Theme": "pink",
-  "DarkMode": true,
+  "Theme": "light",
+  "DarkMode": false,
   "Grey": false,
   "Weak": false,
   "HideTabs": false,
   "SidebarStatus": true,
   "EpThemeColor": "#409EFF",
-  "ShowLogo": true,
+  "ShowLogo": false,
   "ShowModel": "smart"
 }
 

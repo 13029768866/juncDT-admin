@@ -12,6 +12,7 @@ export const useAppStore = defineStore({
       withoutAnimation: false,
       isClickHamburger: false,
     },
+    layout: storageLocal.getItem('responsive-layout')?.layout ?? getConfig().Layout,
   }),
   getters: {
     getSidebarStatus() {
@@ -20,25 +21,28 @@ export const useAppStore = defineStore({
   },
   actions: {
     TOGGLE_SIDEBAR(opened, resize) {
-      // const layout = storageLocal.getItem('responsive-layout');
+      const layout = storageLocal.getItem('responsive-layout');
       if (opened && resize) {
         this.sidebar.withoutAnimation = true;
         this.sidebar.opened = true;
-        // layout.sidebarStatus = true;
+        layout.sidebarStatus = true;
       } else if (!opened && resize) {
         this.sidebar.withoutAnimation = true;
         this.sidebar.opened = false;
-        // layout.sidebarStatus = false;
+        layout.sidebarStatus = false;
       } else if (!opened && !resize) {
         this.sidebar.withoutAnimation = false;
         this.sidebar.opened = !this.sidebar.opened;
         this.sidebar.isClickHamburger = !this.sidebar.opened;
-        // layout.sidebarStatus = this.sidebar.opened;
+        layout.sidebarStatus = this.sidebar.opened;
       }
-      // storageLocal.setItem('responsive-layout', layout);
+      storageLocal.setItem('responsive-layout', layout);
     },
     async toggleSideBar(opened, resize) {
       await this.TOGGLE_SIDEBAR(opened, resize);
+    },
+    setLayout(layout) {
+      this.layout = layout;
     },
   },
 });

@@ -35,6 +35,7 @@
     "@commitlint/cli": "^16.2.3",
     "@commitlint/config-conventional": "^16.2.1",
     "@iconify-icons/ep": "^1.2.4",
+    "@iconify-icons/ri": "^1.2.1",
     "@iconify/vue": "^3.2.1",
     "@intlify/vite-plugin-vue-i18n": "^3.4.0",
     "@pureadmin/theme": "^1.1.0",

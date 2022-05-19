@@ -4,6 +4,13 @@ buttons:
   systemSettings: Open ProjectConfig
   expand: Expand
   collapse: Collapse
+  refreshRoute: RefreshRoute
+  reload: Reload
+  closeCurrentTab: Close CurrentTab
+  closeLeftTabs: Close LeftTabs
+  closeRightTabs: Close RightTabs
+  closeOtherTabs: Close OtherTabs
+  closeAllTabs: Close AllTabs
 menus:
   workbench: Workbench
   error: Error Page

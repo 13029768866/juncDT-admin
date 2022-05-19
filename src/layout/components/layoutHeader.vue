@@ -1,11 +1,14 @@
 <template>
   <div>
-    <navbar />
+    <Navbar />
+    <!--    <Horizontal />-->
+    <Tag />
   </div>
 </template>
 
 <script setup>
-  import navbar from './navbar.vue';
+  import Navbar from './navbar.vue';
+  import Tag from './tag/index.vue';
 </script>
 
 <style scoped></style>

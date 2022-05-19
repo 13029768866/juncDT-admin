@@ -513,7 +513,7 @@
   }
 }
 
-/* 左侧菜单 */
+/* 左侧导航 */
 body[layout='vertical'] {
   $sideBarWidth: 210px;
   @include merge-style($sideBarWidth);
@@ -570,6 +570,19 @@ body[layout='vertical'] {
 
     .submenu-title-noDropdown {
       background: transparent !important;
+    }
+  }
+}
+
+/* 顶部导航 */
+body[layout='horizontal'] {
+  $sideBarWidth: 0;
+  @include merge-style($sideBarWidth);
+
+  .app-wrapper {
+    .fixed-header {
+      width: 100%;
+      transition: none !important;
     }
   }
 }

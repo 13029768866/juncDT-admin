@@ -1,7 +1,7 @@
 <template>
   <div :class="['app-wrapper', set.classes]">
-    <!--  侧边栏  -->
-    <Vertical />
+    <!--  菜单栏  -->
+    <Vertical v-show="layout.includes('vertical')" />
     <!--  main容器  -->
     <div :class="['main-container']">
       <div class="fixed-header">
@@ -35,6 +35,25 @@
         withoutAnimation: set.sidebar.withoutAnimation,
       };
     }),
+  });
+
+  const instance = getCurrentInstance().appContext.app.config.globalProperties;
+
+  // 清空缓存后从serverConfig.json读取默认配置并赋值到storage中
+  const layout = computed(() => {
+    // 导航
+    if (!instance.$storage.layout) {
+      // eslint-disable-next-line vue/no-side-effects-in-computed-properties
+      instance.$storage.layout = {
+        layout: instance.$config?.Layout ?? 'vertical',
+        theme: instance.$config?.Theme ?? 'default',
+        darkMode: instance.$config?.DarkMode ?? false,
+        sidebarStatus: instance.$config?.SidebarStatus ?? true,
+        epThemeColor: instance.$config?.EpThemeColor ?? '#409EFF',
+      };
+    }
+
+    return instance.$storage?.layout.layout;
   });
 </script>
 

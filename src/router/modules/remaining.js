@@ -1,3 +1,6 @@
+import { $t } from '/@/plugins/i18n';
+const Layout = () => import('/@/layout/index.vue');
+
 const remainingRouter = [
   {
     path: '/login',
@@ -7,6 +10,24 @@ const remainingRouter = [
       title: '登录',
       showLink: false,
     },
+  },
+  {
+    path: '/redirect',
+    component: Layout,
+    meta: {
+      icon: 'setting',
+      title: $t('menus.workbench'),
+      i18n: true,
+      showLink: false,
+      rank: 104,
+    },
+    children: [
+      {
+        path: '/redirect/:path(.*)',
+        name: 'redirect',
+        component: () => import('/@/layout/redirect.vue'),
+      },
+    ],
   },
 ];
 

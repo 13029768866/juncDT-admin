@@ -42,6 +42,14 @@ const router = createRouter({
 
 /* 路由守卫 */
 router.beforeEach(() => {
+  // if (to.meta?.keepAlive) {
+  //   const newMatched = to.matched;
+  //   handleAliveRoute(newMatched, 'add');
+  //   // 页面整体刷新和点击标签页刷新
+  //   if (_from.name === undefined || _from.name === 'redirect') {
+  //     handleAliveRoute(newMatched);
+  //   }
+  // }
   NProgress.start();
   /* 登录鉴权 todo */
   /* 外链校验 todo */
