@@ -1,8 +1,10 @@
+import { useRouter } from 'vue-router';
 import { remainingPaths } from '/@/router';
 import { useAppStoreHook } from '/@/store/modules/app';
 import { events } from '/@/utils/mitt';
 
 export function useNav() {
+  const router = useRouter();
   const wrApp = useAppStoreHook();
   /* 菜单选择 */
   const menuSelect = (indexPath, routers) => {
@@ -42,13 +44,19 @@ export function useNav() {
   const openPanel = () => {
     events.emit('openPanel');
   };
+  /* 切换侧边栏 */
   const toggleSideBar = () => {
     wrApp.toggleSideBar();
   };
 
+  /* 回到首页 */
+  const backHome = () => {
+    router.push('/dashboard');
+  };
   return {
     wrApp,
     isCollapse,
+    backHome,
     openPanel,
     menuSelect,
     toggleSideBar,
