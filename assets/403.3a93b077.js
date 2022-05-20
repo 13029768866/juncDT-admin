@@ -1,1 +1,0 @@
-import{E as o}from"./el-button.7c98c5db.js";import{az as a,H as r,I as c,a2 as n,X as s,ag as t}from"./index.b8affd91.js";const _={},d=t(" 403 "),i=t("\u4E3B\u9898\u4FEE\u6539\u6D4B\u8BD5");function l(f,m){const e=o;return r(),c("div",null,[d,n(e,{type:"primary"},{default:s(()=>[i]),_:1})])}var x=a(_,[["render",l]]);export{x as default};
