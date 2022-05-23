@@ -27,4 +27,8 @@ const wrapperEnv = (envConf) => {
   return ret;
 };
 
-export { wrapperEnv };
+// 跨域代理重写
+const regExps = (value, reg) => {
+  return value.replace(new RegExp(reg, 'g'), '');
+};
+export { wrapperEnv, regExps };

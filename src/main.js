@@ -9,10 +9,14 @@ import { injectResponsiveStorage } from '/@/utils/storage/responsive';
 // 样式导入
 import './style/index.scss';
 import 'virtual:windi.css';
+import 'element-plus/dist/index.css';
 
 // 字体图标导入
 import './assets/iconfont/iconfont.js';
 import './assets/iconfont/iconfont.css';
+
+// 路由守卫
+import '/@/router/guard/permissionGuard';
 
 const app = createApp(App);
 

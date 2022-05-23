@@ -1,15 +1,14 @@
 import axios from 'axios';
-import { loadEnv } from '@build/index';
 import { getToken } from '../auth';
 import { tansParams } from '../tools';
 import { storageSession } from '../storage';
-import errorCode from '@/utils/errorCode';
+import errorCode from './errorCode';
 import { ElNotification, ElMessageBox, ElMessage } from 'element-plus';
 
 // 是否显示重新登录
 export let isRelogin = { show: false };
 /* axios 实例 */
-const { VITE_PROXY_DOMAIN, VITE_PROXY_DOMAIN_REAL } = loadEnv();
+const { VITE_PROXY_DOMAIN, VITE_PROXY_DOMAIN_REAL } = import.meta.env;
 const instance = axios.create({
   // 请求URL公共部分
   baseURL: process.env.NODE_ENV === 'production' ? VITE_PROXY_DOMAIN_REAL : VITE_PROXY_DOMAIN,
@@ -105,6 +104,7 @@ instance.interceptors.response.use(
       }
       return Promise.reject('无效的会话，或者会话已过期，请重新登录。');
     } else if (code === '500') {
+      console.log('res500----');
       ElMessage({
         message: msg,
         type: 'error',
@@ -120,7 +120,6 @@ instance.interceptors.response.use(
     }
   },
   (error) => {
-    console.log('err' + error);
     let { message } = error;
     if (message == 'Network Error') {
       message = '后端接口连接异常';

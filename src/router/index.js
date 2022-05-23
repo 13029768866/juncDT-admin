@@ -1,8 +1,43 @@
 import { createRouter, createWebHashHistory } from 'vue-router';
-import NProgress from '/@/utils/progress';
 import { buildHierarchyTree } from '/@/utils/tree';
-import { initRouter, ascending, formatFlatteningRoutes, formatTwoStageRoutes } from './utils';
-import { usePermissionStoreHook } from '/@/store/modules/permission';
+import { ascending, formatFlatteningRoutes, formatTwoStageRoutes } from './utils';
+
+/*
+  路由可配置项
+
+  // 当设置 true 的时候该路由不会再侧边栏出现 如401，login等页面，或者如一些编辑页面/edit/1
+  hidden: Boolean,
+
+  // 当你一个路由下面的 children 声明的路由大于1个时，自动会变成嵌套的模式
+  // 只有一个时，会将那个子路由当做根路由显示在侧边栏--如引导页面
+  // 若你想不管路由下面的 children 声明的个数都显示你的根路由
+  // 你可以设置 alwaysShow: true，这样它就会忽略之前定义的规则，一直显示根路由
+  alwaysShow: Boolean
+
+  // 当设置 noRedirect 的时候该路由在面包屑导航中不可被点击
+  redirect: noRedirect
+
+  // 设定路由的名字，一定要填写不然使用<keep-alive>时会出现各种问题
+  name:'router-name'
+
+  // 访问路由的默认传递参数
+  query: '{"id": 1, "name": "ry"}'
+
+  // 访问路由的角色权限
+  roles: ['admin', 'common']
+
+  // 访问路由的菜单权限
+  permissions: ['a:a:a', 'b:b:b']
+
+  meta: {
+    noCache: true                   // 如果设置为true，则不会被 <keep-alive> 缓存(默认 false)
+    title: 'title'                  // 设置该路由在侧边栏和面包屑中展示的名字
+    icon: 'svg-name'                // 设置该路由的图标，对应路径src/assets/icons/svg
+    breadcrumb: false               // 如果设置为false，则不会在breadcrumb面包屑中显示
+    activeMenu: '/system/user'      // 当路由设置了该属性，则会高亮相对应的侧边栏。
+  }
+
+*/
 
 /* 路由模块 */
 import dashboardRouter from './modules/dashboard';
@@ -10,7 +45,7 @@ import errorRouter from './modules/error';
 import remainingRouter from './modules/remaining';
 
 /* 初始路由(未做任何处理) */
-const routes = [dashboardRouter, errorRouter];
+const routes = [dashboardRouter, errorRouter, ...remainingRouter];
 
 /* 扁平化的静态路由（全部拍成二级） */
 const createConstantRoutes = (routes) => {
@@ -32,34 +67,11 @@ export const constantMenus = ascending(routes).concat(...remainingRouter);
 export const remainingPaths = Object.keys(remainingRouter).map((v) => {
   return remainingRouter[v].path;
 });
-
 const router = createRouter({
   history: createWebHashHistory(import.meta.env.VITE_PUBLIC_PATH),
-  routes: constantRoutes.concat(...remainingRouter),
-  strict: true,
+  routes: routes,
+  strict: false,
   scrollBehavior: () => ({ left: 0, top: 0 }),
-});
-
-/* 路由守卫 */
-router.beforeEach(() => {
-  // if (to.meta?.keepAlive) {
-  //   const newMatched = to.matched;
-  //   handleAliveRoute(newMatched, 'add');
-  //   // 页面整体刷新和点击标签页刷新
-  //   if (_from.name === undefined || _from.name === 'redirect') {
-  //     handleAliveRoute(newMatched);
-  //   }
-  // }
-  NProgress.start();
-  /* 登录鉴权 todo */
-  /* 外链校验 todo */
-  if (usePermissionStoreHook().wholeMenus.length === 0) {
-    initRouter();
-  }
-});
-
-router.afterEach(() => {
-  NProgress.done();
 });
 
 export default router;

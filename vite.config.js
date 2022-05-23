@@ -1,7 +1,7 @@
 import { resolve } from 'path';
 import { defineConfig, loadEnv } from 'vite';
 // 处理环境变量
-import { wrapperEnv } from './build';
+import { wrapperEnv, regExps } from './build';
 // 插件列表
 import { getPluginsList } from './build/plugins';
 
@@ -19,7 +19,7 @@ export default defineConfig(({ command, mode }) => {
   const root = process.cwd();
   const env = loadEnv(mode, root);
   const viteEnv = wrapperEnv(env);
-  const { VITE_PORT, VITE_LEGACY, VITE_PUBLIC_PATH } = viteEnv;
+  const { VITE_PORT, VITE_LEGACY, VITE_PUBLIC_PATH, VITE_PROXY_DOMAIN } = viteEnv;
 
   return {
     // 公共基础路径
@@ -58,7 +58,14 @@ export default defineConfig(({ command, mode }) => {
       host: '0.0.0.0',
       port: VITE_PORT,
       https: false,
-      // 本地跨域代理（todo）
+      // 本地跨域代理
+      proxy: {
+        [VITE_PROXY_DOMAIN]: {
+          target: `http://192.168.8.211:8003/angdun-manage/api`,
+          changeOrigin: true,
+          rewrite: (path) => regExps(path, VITE_PROXY_DOMAIN),
+        },
+      },
     },
     // 构建选项
     build: {
