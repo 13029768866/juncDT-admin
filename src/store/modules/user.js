@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia';
 import { store } from '/@/store';
-import { getToken, setToken } from '/@/utils/auth';
-import { login, getInfo } from '/@/api/login';
+import { getToken, setToken, removeToken } from '/@/utils/auth';
+import { login, getInfo, logout } from '/@/api/login';
 
 export const useUserStore = defineStore({
   id: 'WR-user',
@@ -15,6 +15,9 @@ export const useUserStore = defineStore({
   getters: {
     getRoles() {
       return this.roles;
+    },
+    getPermissions() {
+      return this.permissions;
     },
   },
   actions: {
@@ -62,6 +65,21 @@ export const useUserStore = defineStore({
     },
 
     // 退出登录
+    LogOut() {
+      return new Promise((resolve, reject) => {
+        logout(this.token)
+          .then(() => {
+            this.SET_TOKEN('');
+            this.SET_ROLES([]);
+            this.SET_PERMISSIONS([]);
+            removeToken();
+            resolve();
+          })
+          .catch((err) => {
+            reject(err);
+          });
+      });
+    },
   },
 });
 

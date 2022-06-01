@@ -4,6 +4,7 @@ import { tansParams } from '../tools';
 import { storageSession } from '../storage';
 import errorCode from './errorCode';
 import { ElNotification, ElMessageBox, ElMessage } from 'element-plus';
+import { useUserStoreHook } from '/@/store/modules/user';
 
 // 是否显示重新登录
 export let isRelogin = { show: false };
@@ -44,7 +45,6 @@ instance.interceptors.request.use(
         time: new Date().getTime(),
       };
       const sessionObj = storageSession.getItem('sessionObj');
-      console.log('sessionObj', sessionObj);
       if (sessionObj === undefined || sessionObj === null || sessionObj === '') {
         storageSession.setItem('sessionObj', requestObj);
       } else {
@@ -93,10 +93,11 @@ instance.interceptors.response.use(
         })
           .then(() => {
             isRelogin.show = false;
-            console.log('执行退出登录操作');
-            // store.dispatch('LogOut').then(() => {
-            //   location.href = '/dataCenter/web/index';
-            // });
+            useUserStoreHook()
+              .LogOut()
+              .then(() => {
+                location.href = '/index';
+              });
           })
           .catch(() => {
             isRelogin.show = false;

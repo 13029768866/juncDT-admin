@@ -25,9 +25,11 @@ addIcon('lock', Lock);
 // remix icon
 import arrowRightSLine from '@iconify-icons/ri/arrow-right-s-line';
 import arrowLeftSLine from '@iconify-icons/ri/arrow-left-s-line';
+import LogoutCircleRLine from '@iconify-icons/ri/logout-circle-r-line';
 
 addIcon('arrow-right-s-line', arrowRightSLine);
 addIcon('arrow-left-s-line', arrowLeftSLine);
+addIcon('logout-circle-r-line', LogoutCircleRLine);
 
 // Iconify Icon在Vue里离线使用
 export default defineComponent({

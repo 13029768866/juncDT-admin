@@ -1,6 +1,7 @@
 buttons:
   fullscreen: FullScreen
   exitfullscreen: ExitFullscreen
+  LoginOut: LoginOut
   systemSettings: Open ProjectConfig
   expand: Expand
   collapse: Collapse

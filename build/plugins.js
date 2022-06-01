@@ -1,14 +1,18 @@
 import { resolve } from 'path';
 import vue from '@vitejs/plugin-vue';
 import vueJsx from '@vitejs/plugin-vue-jsx';
+import Icons from 'unplugin-icons/vite';
+import IconsResolver from 'unplugin-icons/resolver';
 import Components from 'unplugin-vue-components/vite';
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers';
 import AutoImport from 'unplugin-auto-import/vite';
 import WindiCSS from 'vite-plugin-windicss';
 import svgLoader from 'vite-svg-loader';
+import { svgBuilder } from '../src/plugins/svgBuilder';
 import VueI18n from '@intlify/vite-plugin-vue-i18n';
 import themePreprocessorPlugin from '@pureadmin/theme';
 import { genScssMultipleScopeVars } from '../src/layout/theme';
+import vueSetupExtend from 'vite-plugin-vue-setup-extend';
 
 export function getPluginsList(command, VITE_LEGACY) {
   console.log(command, VITE_LEGACY);
@@ -23,15 +27,34 @@ export function getPluginsList(command, VITE_LEGACY) {
     // 自动导入
     AutoImport({
       imports: ['vue', 'vue-router', '@vueuse/core'],
+      resolvers: [
+        ElementPlusResolver(),
+
+        // Auto import icon components
+        // 自动导入图标组件
+        IconsResolver({
+          prefix: 'Icon',
+        }),
+      ],
     }),
     // 组件自动按需加载
     Components({
-      resolvers: [ElementPlusResolver()],
+      resolvers: [
+        ElementPlusResolver(),
+        IconsResolver({
+          enabledCollections: ['ep'],
+        }),
+      ],
+    }),
+    // element Icons
+    Icons({
+      autoInstall: true,
     }),
     // 原子化css库
     WindiCSS(),
     // svg组件化支持
     svgLoader(),
+    svgBuilder('./src/assets/svg/'),
     // 自定义主题
     themePreprocessorPlugin({
       scss: {
@@ -52,5 +75,6 @@ export function getPluginsList(command, VITE_LEGACY) {
         customThemeCssFileName: (scopeName) => scopeName,
       },
     }),
+    vueSetupExtend(),
   ];
 }

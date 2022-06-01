@@ -78,6 +78,7 @@
 
   import { useMultiTagsStoreHook } from '/@/store/modules/multiTags';
   import { usePermissionStoreHook } from '/@/store/modules/permission';
+  import { usePermissionsStoreHook } from '/@/store/modules/permissions';
 
   import close from '/@/assets/svg/close.svg?component';
   import refresh from '/@/assets/svg/refresh.svg?component';
@@ -89,6 +90,7 @@
   const { t } = useI18n();
   const route = useRoute();
   const router = useRouter();
+  const topbarRoutes = usePermissionsStoreHook().getTopbarRoutes;
   const instance = getCurrentInstance();
   const showTags = ref(storageLocal.getItem('responsive-configure').hideTabs) ?? 'false';
 
@@ -110,7 +112,6 @@
     };
   });
   const tabNavPadding = 10;
-
   const moveToView = (index) => {
     if (!instance.refs['dynamic' + index]) {
       return;
@@ -166,12 +167,14 @@
   const linkIsActive = computed(() => {
     return (item) => {
       if (Object.keys(route.query).length === 0) {
-        if (route.path === item.path) {
+        // 路由没有参数比较path
+        if (route.path === item.path || route.path === `${item.parentPath}/${item.path}`) {
           return 'is-active';
         } else {
           return '';
         }
       } else {
+        // 路由存在参数,比较参数
         if (isEqual(route?.query, item?.query)) {
           return 'is-active';
         } else {
@@ -180,11 +183,12 @@
       }
     };
   });
+  // 关闭图标
   const iconIsActive = computed(() => {
     return (item, index) => {
       if (index === 0) return;
       if (Object.keys(route.query).length === 0) {
-        if (route.path === item.path) {
+        if (route.path === item.path || route.path === `${item.parentPath}/${item.path}`) {
           return true;
         } else {
           return false;
@@ -204,6 +208,7 @@
     const hasValue = multiTags.value.some((item) => {
       return item.path === value;
     });
+
     function concatPath(arr, value, parentPath) {
       if (!hasValue) {
         arr.forEach((arrItem) => {
@@ -223,7 +228,7 @@
         });
       }
     }
-    concatPath(router.options.routes, value, parentPath);
+    concatPath(topbarRoutes, value, parentPath);
   }
 
   // 触发tags标签切换
@@ -526,6 +531,7 @@
   };
 
   watch([route], () => {
+    console.log('路由变化');
     activeIndex.value = -1;
     dynamicTagView();
   });

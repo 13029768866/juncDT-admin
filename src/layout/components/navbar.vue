@@ -32,16 +32,15 @@
           <img :src="avatars" />
           <p>我二弟天下无敌</p>
         </span>
-        <!--        <template #dropdown>-->
-        <!--          <el-dropdown-menu class="logout">-->
-        <!--            <el-dropdown-item @click="logout">-->
-        <!--              <IconifyIconOffline-->
-        <!--                icon="logout-circle-r-line"-->
-        <!--                style="margin: 5px"-->
-        <!--              />{{ t("buttons.hsLoginOut") }}</el-dropdown-item-->
-        <!--            >-->
-        <!--          </el-dropdown-menu>-->
-        <!--        </template>-->
+        <template #dropdown>
+          <el-dropdown-menu class="logout">
+            <el-dropdown-item @click="logout">
+              <IconifyIconOffline icon="logout-circle-r-line" style="margin: 5px" />{{
+                t('buttons.LoginOut')
+              }}</el-dropdown-item
+            >
+          </el-dropdown-menu>
+        </template>
       </el-dropdown>
       <!--  设置  -->
       <span class="el-icon-setting" :title="t('buttons.systemSettings')" @click="openPanel">
@@ -52,12 +51,15 @@
 </template>
 
 <script setup>
+  import { ElMessageBox } from 'element-plus';
+  import { useUserStoreHook } from '/@/store/modules/user';
+
   import { useI18n } from 'vue-i18n';
   import { useNav } from '../hooks/useNav';
 
   import Screenfull from '../components/screenfull/index.vue';
   import Hamburger from './sidebar/hamburger.vue';
-  // import Breadcrumb from './sidebar/breadCrumb.vue';
+
   import globalization from '/@/assets/svg/globalization.svg?component';
   import avatars from '/@/assets/avatars.webp';
 
@@ -72,6 +74,22 @@
     instance.locale = { locale: locale.value };
   };
   /* 国际化end */
+
+  const logout = () => {
+    ElMessageBox.confirm('确定注销并退出系统吗？', '提示', {
+      confirmButtonText: '确定',
+      cancelButtonText: '取消',
+      type: 'warning',
+    })
+      .then(() => {
+        useUserStoreHook()
+          .LogOut()
+          .then(() => {
+            location.href = '/index';
+          });
+      })
+      .catch(() => {});
+  };
 </script>
 
 <style lang="scss" scoped>

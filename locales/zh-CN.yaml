@@ -1,6 +1,7 @@
 buttons:
   fullscreen: 全屏
   exitfullscreen: 退出全屏
+  LoginOut: 退出系统
   systemSettings: 打开项目配置
   expand: 展开
   collapse: 折叠

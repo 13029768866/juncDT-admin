@@ -1,21 +1,25 @@
 import { useRouter } from 'vue-router';
-import { remainingPaths } from '/@/router';
 import { useAppStoreHook } from '/@/store/modules/app';
 import { events } from '/@/utils/mitt';
+
+const errorInfo = '当前路由配置不正确，请检查配置';
 
 export function useNav() {
   const router = useRouter();
   const wrApp = useAppStoreHook();
   /* 菜单选择 */
   const menuSelect = (indexPath, routers) => {
-    if (remainingPaths.includes(indexPath)) return;
     let parentPath = '';
     const parentPathIndex = indexPath.lastIndexOf('/');
+    let target = '';
     if (parentPathIndex > 0) {
       parentPath = indexPath.slice(0, parentPathIndex);
-      console.log(parentPath);
+      target = indexPath.slice(parentPathIndex + 1);
     }
+
     const findCurrentRoute = (indexPath, routes) => {
+      if (!routes) return console.error(errorInfo);
+
       return routes.map((item) => {
         if (item.path === indexPath) {
           if (item.redirect) {
@@ -32,7 +36,7 @@ export function useNav() {
         }
       });
     };
-    findCurrentRoute(indexPath, routers);
+    findCurrentRoute(target, routers);
   };
 
   /* 侧边栏切换 */

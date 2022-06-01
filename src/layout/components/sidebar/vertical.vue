@@ -24,7 +24,7 @@
 </template>
 
 <script setup>
-  import { usePermissionStoreHook } from '/@/store/modules/permission';
+  import { usePermissionsStoreHook } from '/@/store/modules/permissions';
   import { storageLocal } from '/@/utils/storage';
   import { events } from '/@/utils/mitt';
 
@@ -34,13 +34,13 @@
   import Logo from './logo.vue';
 
   const route = useRoute();
-  const routers = useRouter().options.routes;
+  const routers = usePermissionsStoreHook().getTopbarRoutes;
   /* menu操作 start */
   const { isCollapse, menuSelect } = useNav();
 
   // 菜单数据
   const menuData = computed(() => {
-    return usePermissionStoreHook().wholeMenus;
+    return usePermissionsStoreHook().sidebarRoutes;
   });
   const showLogo = ref(storageLocal.getItem('responsive-configure')?.showLogo ?? true);
   /* menu操作 end */

@@ -61,3 +61,72 @@ ul {
 .html-grey {
   filter: grayscale(100%);
 }
+
+.app-container {
+  padding: 20px;
+  height: calc(100vh - 130px);
+  margin: 22.5px;
+  overflow-y: auto;
+  background: #fff;
+}
+
+.el-dialog:not(.is-fullscreen) {
+  margin-top: 6vh !important;
+}
+
+.el-dialog.scrollbar .el-dialog__body {
+  overflow: auto;
+  overflow-x: hidden;
+  max-height: 70vh;
+  padding: 10px 20px 0;
+}
+
+.el-table {
+  .el-table__header-wrapper,
+  .el-table__fixed-header-wrapper {
+    th {
+      word-break: break-word;
+      background-color: #f8f8f9 !important;
+      color: #515a6e;
+      height: 40px !important;
+      font-size: 13px;
+    }
+  }
+  .el-table__body-wrapper {
+    .el-button [class*='el-icon-'] + span {
+      margin-left: 1px;
+    }
+  }
+}
+
+/** 表单布局 **/
+.form-header {
+  font-size: 15px;
+  color: #6379bb;
+  border-bottom: 1px solid #ddd;
+  margin: 8px 10px 25px 10px;
+  padding-bottom: 5px;
+}
+
+/** 表格布局 **/
+.pagination-container {
+  // position: relative;
+  height: 25px;
+  margin-bottom: 10px;
+  margin-top: 15px;
+  padding: 10px 20px !important;
+}
+
+/* tree border */
+.tree-border {
+  margin-top: 5px;
+  border: 1px solid #e5e6e7;
+  background: #ffffff none;
+  border-radius: 4px;
+  width: 100%;
+}
+
+.pagination-container .el-pagination {
+  right: 0;
+  position: absolute;
+}

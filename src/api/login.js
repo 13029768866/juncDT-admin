@@ -17,3 +17,11 @@ export const getInfo = () => {
     method: 'get',
   });
 };
+
+// 退出登录
+export const logout = () => {
+  return request({
+    url: '/logout',
+    method: 'post',
+  });
+};

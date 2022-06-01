@@ -276,38 +276,6 @@
   }
 }
 
-/* 灵动模式 */
-.schedule-active {
-  width: 100%;
-  height: 2px;
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  background: var(--el-color-primary);
-}
-
-/* 灵动模式下鼠标移入显示蓝色进度条 */
-.schedule-in {
-  width: 100%;
-  height: 2px;
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  background: var(--el-color-primary);
-  animation: scheduleInWidth 400ms ease-in;
-}
-
-/* 灵动模式下鼠标移出隐藏蓝色进度条 */
-.schedule-out {
-  width: 0;
-  height: 2px;
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  background: var(--el-color-primary);
-  animation: scheduleOutWidth 400ms ease-in;
-}
-
 /* 刷新按钮动画效果 */
 .refresh-button {
   animation: rotate 600ms linear infinite;

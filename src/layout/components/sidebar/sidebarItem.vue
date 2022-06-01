@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="!props.item.hidden">
     <!--  没有子路由 -->
     <template
       v-if="
@@ -11,19 +11,16 @@
         :index="resolvePath(onlyOneChild.path)"
         :class="{ 'submenu-title-noDropdown': !isNest }"
       >
-        <!-- icon -->
-        <div class="el-icon" v-show="props.item.meta.icon">
-          <IconifyIconOffline :icon="props.item.meta.icon" />
+        <!-- icon  -->
+        <div class="el-icon" v-if="onlyOneChild.meta.icon">
+          <svg-icon :icon-class="onlyOneChild.meta.icon" />
         </div>
         <!-- title -->
         <template #title>
           <div>
             <el-tooltip placement="top" :offset="-10" :disabled="!onlyOneChild.showTooltip">
-              <!--            <template #content>-->
-              <!--              {{ onlyOneChild.meta.title }}-->
-              <!--            </template>-->
               <span ref="menuTextRef">
-                {{ transformI18n(onlyOneChild.meta.title, onlyOneChild.meta.i18n) }}
+                {{ locale == 'en' ? onlyOneChild.meta?.titleEn : onlyOneChild.meta?.title }}
               </span>
             </el-tooltip>
           </div>
@@ -34,15 +31,13 @@
     <el-sub-menu v-else popper-append-to-body :index="resolvePath(props.item.path)">
       <template #title>
         <!--  icon  -->
-        <div v-show="props.item.meta.icon" :class="['el-icon', props.item.meta.icon]">
-          <IconifyIconOffline :icon="props.item.meta.icon" />
+        <div class="el-icon" v-if="onlyOneChild.meta.icon">
+          <svg-icon :icon-class="props.item.meta.icon" />
         </div>
         <!-- title -->
         <el-tooltip placement="top" :offset="-10" :disabled="!props.item.showTooltip">
           <div ref="menuTextRef" overflow="hidden" :style="getSubTextStyle">
-            <span>
-              {{ transformI18n(props.item.meta.title, props.item.meta.i18n) }}
-            </span>
+            <span> {{ locale == 'en' ? props.item.meta?.titleEn : props.item.meta?.title }} </span>
           </div>
         </el-tooltip>
       </template>
@@ -60,10 +55,10 @@
 
 <script setup>
   import path from 'path';
-
-  import { transformI18n } from '/@/plugins/i18n';
+  import { useI18n } from 'vue-i18n';
   import { useNav } from '../../hooks/useNav';
 
+  const { locale } = useI18n();
   const { wrApp } = useNav();
   const props = defineProps({
     item: {
@@ -81,9 +76,14 @@
   /* 菜单子路由处理 */
   const onlyOneChild = ref(null);
   const hasOneShowingChild = (children = [], parent) => {
+    // 根据hidden显示
     const showingChildren = children.filter((item) => {
-      onlyOneChild.value = item;
-      return true;
+      if (item.hidden) {
+        return false;
+      } else {
+        onlyOneChild.value = item;
+        return true;
+      }
     });
 
     // 是否显示父级

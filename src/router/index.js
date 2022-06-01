@@ -1,6 +1,4 @@
 import { createRouter, createWebHashHistory } from 'vue-router';
-import { buildHierarchyTree } from '/@/utils/tree';
-import { ascending, formatFlatteningRoutes, formatTwoStageRoutes } from './utils';
 
 /*
   路由可配置项
@@ -44,32 +42,11 @@ import dashboardRouter from './modules/dashboard';
 import errorRouter from './modules/error';
 import remainingRouter from './modules/remaining';
 
-/* 初始路由(未做任何处理) */
-const routes = [dashboardRouter, errorRouter, ...remainingRouter];
-
-/* 扁平化的静态路由（全部拍成二级） */
-const createConstantRoutes = (routes) => {
-  // rank排序
-  const rankOrder = ascending(routes);
-  // 创建层级关系
-  const hierarchyTree = buildHierarchyTree(rankOrder);
-  // 处理为一维路由
-  const oneDimensional = formatFlatteningRoutes(hierarchyTree);
-  // 变成常规二级路由
-  return formatTwoStageRoutes(oneDimensional);
-};
-export const constantRoutes = createConstantRoutes(routes);
-
-/* 用于渲染菜单，保持原始层级 */
-export const constantMenus = ascending(routes).concat(...remainingRouter);
-
-/* 不参与菜单的路由路径表 */
-export const remainingPaths = Object.keys(remainingRouter).map((v) => {
-  return remainingRouter[v].path;
-});
+/* 公共路由 */
+export const constantRoutes = [dashboardRouter, errorRouter, ...remainingRouter];
 const router = createRouter({
   history: createWebHashHistory(import.meta.env.VITE_PUBLIC_PATH),
-  routes: routes,
+  routes: constantRoutes,
   strict: false,
   scrollBehavior: () => ({ left: 0, top: 0 }),
 });
